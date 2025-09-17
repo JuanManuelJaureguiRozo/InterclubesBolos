@@ -298,9 +298,9 @@
     for (let i = 0; i < rows.length; i++) {
       const cells = rows[i].children;
 
-      if (hoja.includes("individual")) {
+      if (hoja.includes("individual") || hoja.includes("delegados")) {
 
-        for (let j = 2; j <= 12; j++) {
+        for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
           const value = parseInt(cell?.textContent.trim());
           if (!isNaN(value) && value >= 200) {
@@ -310,7 +310,7 @@
       }
 
       if (hoja.includes("pareja")) {
-        for (let j = 2; j <= 12; j++) {
+        for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
           if (!cell) continue;
           const value = parseInt(cell.textContent.trim());
@@ -328,7 +328,7 @@
       }
 
       if (hoja.includes("ternas")) {
-        for (let j = 2; j <= 12; j++) {
+        for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
           if (!cell) continue;
           const value = parseInt(cell.textContent.trim());
@@ -342,6 +342,29 @@
               }
             }
             else {
+              if (j != 12) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+          }
+        }
+      }
+
+      if (hoja.includes("equipos")) {
+        for (let j = 7; j <= 12; j++) {
+          const cell = cells[j];
+          if (!cell) continue;
+          const value = parseInt(cell.textContent.trim());
+          if (!isNaN(value) && value >= 200) {
+            if (i % 6 === 0) {
+              cell.style.backgroundColor = "#ffeb3b";
+            }
+            if (i % 6 === 1) {
+              if (j != 12) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+            if (i % 6 === 2) {
               if (j != 12) {
                 cell.style.backgroundColor = "#ffeb3b";
               }
@@ -365,7 +388,7 @@
     for (let i = 0; i < rows.length; i++) {
       const cells = rows[i].children;
       // recorre todas las columnas de puntuación disponibles
-      for (let j = 2; j < 12; j++) {
+      for (let j = 7; j < 12; j++) {
         const v = parseInt(cells[j]?.textContent.trim(), 10);
         if (!Number.isNaN(v) && v > maxScore) {
           maxScore = v;
