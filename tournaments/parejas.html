@@ -156,20 +156,21 @@
 </head>
 <body>
 
+  <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container-fluid d-flex justify-content-between align-items-center">
       
-      <!-- Botón menú a la izquierda en móviles -->
+      <!-- MENU BUTTON LEFT SIDE MOBILE -->
       <button class="navbar-toggler order-1 order-lg-0 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
         <span class="navbar-toggler-icon"></span>
       </button>
   
-      <!-- Logo y texto a la derecha en móviles -->
+      <!-- LOGO AND TEXT RIGHT SIDE MOBILE -->
       <a class="navbar-brand fw-bold d-flex align-items-center order-2 order-lg-1 ms-auto" href="../index.html">
         <img src="../public/logo.png" alt="Logo Interclubes" class="logo-img"> Interclubes Bolos
       </a>
   
-      <!-- Menú colapsable -->
+      <!-- COLLAPSABLE MENU -->
       <div class="collapse navbar-collapse order-3 order-lg-2" id="navbarNavDropdown">
         <ul class="navbar-nav flex-column flex-lg-row">
           <!-- HOME -->
@@ -187,6 +188,7 @@
               <li><a class="dropdown-item" href="../tournaments/individual_femenino.html">Individual Femenino</a></li>
               <li><a class="dropdown-item" href="../tournaments/individual_masculino.html">Individual Masculino</a></li>
               <li><a class="dropdown-item" href="../tournaments/parejas.html">Parejas Mixtas</a></li>
+              <li><a class="dropdown-item" href="../tournaments/equipos.html">Equipos</a></li>
             </ul>
           </li>
         </ul>
@@ -196,19 +198,19 @@
 <div id="menu-overlay" class="menu-overlay"></div>  
 
 <div class="container contenido text-center">
-  <h1>Parejas Mixtas</h1>
+  <h1>Resultados - Parejas Mixtas</h1>
 
-  <!-- Indicador de carga -->
+  <!-- LOADER -->
   <div id="loader" class="mt-4 d-flex justify-content-center align-items-center flex-column">
-    <div class="spinner-border text-success" role="status">
+    <div class="spinner-border" style="color: #1b70d9" role="status">
       <span class="visually-hidden">Cargando...</span>
     </div>
     <p class="mt-3">Cargando resultados, por favor espera...</p>
   </div>
 
-  <!-- Aquí va la tabla -->
+  <!-- TABLE -->
   <div class="table-responsive mt-4" id="tabla-resultados" style="display:none;"></div>
-  <div id="mejor-pareja" class="mt-4"></div>
+  <!-- <div id="mejor-pareja" class="mt-4"></div> -->
 </div>
 
 <!-- FOOTER -->

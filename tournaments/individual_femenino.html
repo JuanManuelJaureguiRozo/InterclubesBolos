@@ -164,7 +164,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
   
-      <!-- lOGO AND TEXT RIGHT SIDE MOBILE -->
+      <!-- LOGO AND TEXT RIGHT SIDE MOBILE -->
       <a class="navbar-brand fw-bold d-flex align-items-center order-2 order-lg-1 ms-auto" href="../index.html">
         <img src="../public/logo.png" alt="Logo Interclubes" class="logo-img"> Interclubes Bolos
       </a>
@@ -187,6 +187,7 @@
               <li><a class="dropdown-item" href="../tournaments/individual_femenino.html">Individual Femenino</a></li>
               <li><a class="dropdown-item" href="../tournaments/individual_masculino.html">Individual Masculino</a></li>
               <li><a class="dropdown-item" href="../tournaments/parejas.html">Parejas Mixtas</a></li>
+              <li><a class="dropdown-item" href="../tournaments/equipos.html">Equipos</a></li>
             </ul>
           </li>
         </ul>
@@ -197,19 +198,19 @@
   <div id="menu-overlay" class="menu-overlay"></div>
 
 <div class="container contenido text-center">
-  <h1>Individual Femenino</h1>
+  <h1>Resultados - Individual Femenino</h1>
 
-  <!-- Indicador de carga -->
+  <!-- LOADER -->
   <div id="loader" class="mt-4 d-flex justify-content-center align-items-center flex-column">
-    <div class="spinner-border text-success" role="status">
+    <div class="spinner-border" style="color: #1b70d9" role="status">
       <span class="visually-hidden">Cargando...</span>
     </div>
     <p class="mt-3">Cargando resultados, por favor espera...</p>
   </div>
 
-  <!-- Aquí va la tabla -->
+  <!-- TABLE -->
   <div class="table-responsive mt-4" id="tabla-resultados" style="display:none;"></div>
-  <div id="mejor-linea" class="mt-4"></div>
+  <!-- <div id="mejor-linea" class="mt-4"></div> -->
 </div>
 
 <!-- FOOTER -->
