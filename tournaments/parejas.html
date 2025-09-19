@@ -178,10 +178,10 @@
               Inicio
             </a>
           </li>          
-          <!-- INTERCUBES HATOGRANDE -->
+          <!-- MODALIDADES -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-              Interclubes Hatogrande
+              Modalidades
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="../tournaments/individual_femenino.html">Individual Femenino</a></li>
@@ -219,7 +219,7 @@
 </footer>
 
 <script>
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbySS7M3F_DF-LU50M22yOYNu7g5J0RbV4jgnVzOxppkXYGWu3A6zoEVePvzt9cRxI_J/exec?hoja=Parejas%202025-2%20Ordenado";
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxu1NqPwuyQmrddmLgRewBeKnzO4f6ONqehScJopp0YEQvmlQr19mZq4a6hqsOZmIou/exec?hoja=PARX";
 
   async function fetchSheetAsTable(url) {
     const loader = document.getElementById("loader");
@@ -266,7 +266,7 @@
 
       table.appendChild(tbody);
 
-      if (new URL(url).searchParams.get("hoja")?.toLowerCase().includes("pareja")) {
+      if (new URL(url).searchParams.get("hoja")?.toLowerCase().includes("par")) {
         const rows = tbody.querySelectorAll("tr");
 
         for (let i = 0; i < rows.length; i += 2) {
@@ -338,7 +338,7 @@
       tabla.style.display = "block";
 
       // Mostrar mejor línea sin HCP (para parejas)
-      if (result && result.sinHCP.puntaje != 0) {
+/*    if (result && result.sinHCP.puntaje != 0) {
 
         const card = document.createElement("div");
         card.className = "card mt-3 shadow-sm border-success mx-auto";
@@ -356,7 +356,7 @@
         `;
 
         mejorPareja.appendChild(card);
-      }
+      } */
 
       // Mostrar mejor línea con HCP (para parejas)
       if (result && result.conHCP.puntaje != 0) {
@@ -390,7 +390,7 @@
 
   function resaltarCeldas(table, url) {
     const hoja = new URL(url).searchParams.get("hoja")?.toLowerCase() || "";
-    if (hoja.includes("todo evento")) return;
+    if (hoja.includes("te")) return;
 
     const rows = table.querySelectorAll("tbody tr");
     const rows1 = Array.from(table.querySelectorAll("tbody tr"));
@@ -398,7 +398,7 @@
     for (let i = 0; i < rows.length; i++) {
       const cells = rows[i].children;
 
-      if (hoja.includes("individual") || hoja.includes("delegados")) {
+      if (hoja.includes("fem") || hoja.includes("mas") || hoja.includes("del")) {
         for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
           const value = parseInt(cell?.textContent.trim());
@@ -408,7 +408,7 @@
         }
       }
 
-      if (hoja.includes("pareja")) {
+      if (hoja.includes("par")) {
         for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
           if (!cell) continue;
@@ -449,7 +449,7 @@
         }
       }
 
-      if (hoja.includes("equipos")) {
+      if (hoja.includes("eq")) {
         for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
           if (!cell) continue;

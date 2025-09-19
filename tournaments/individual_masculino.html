@@ -178,10 +178,10 @@
               Inicio
             </a>
           </li>   
-          <!-- INTERCUBES HATOGRANDE -->
+          <!-- MODALIDADES -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-              Interclubes Hatogrande
+              Modalidades
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="../tournaments/individual_femenino.html">Individual Femenino</a></li>
@@ -220,7 +220,7 @@
 </footer>
 
 <script>
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbycSAYRd7RtVShWDAuQj4Fiy5HKnOt_PK1i3Ap0k287aZqOxteCMfJI6H26nWRvGc2PHA/exec?hoja=Individual%20Femenino%202025-2%20Ordenado";
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxu1NqPwuyQmrddmLgRewBeKnzO4f6ONqehScJopp0YEQvmlQr19mZq4a6hqsOZmIou/exec?hoja=MASX";
 
   async function fetchSheetAsTable(url) {
     const loader = document.getElementById("loader");
@@ -270,7 +270,7 @@
       tabla.appendChild(table);
       tabla.style.display = "block";
 
-      // Mostrar mejor línea
+/*       // Mostrar mejor línea
       if (result && result.maxScore != null) {
         const { maxScore, maxPlayer } = result;
         const card = document.createElement("div");
@@ -286,7 +286,7 @@
           </div>
         `;
         mejorLinea.appendChild(card);
-      }
+      } */
 
     } catch (err) {
       console.error("Error al cargar la tabla:", err);
@@ -299,14 +299,14 @@
 
   function resaltarCeldas(table, url) {
     const hoja = new URL(url).searchParams.get("hoja")?.toLowerCase() || "";
-    if (hoja.includes("todo evento")) return;
+    if (hoja.includes("te")) return;
 
     const rows = table.querySelectorAll("tbody tr");
 
     for (let i = 0; i < rows.length; i++) {
       const cells = rows[i].children;
 
-      if (hoja.includes("individual") || hoja.includes("delegados")) {
+      if (hoja.includes("fem") || hoja.includes("mas") ||hoja.includes("del")) {
         for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
           const value = parseInt(cell?.textContent.trim());
@@ -316,7 +316,7 @@
         }
       }
 
-      if (hoja.includes("pareja")) {
+      if (hoja.includes("par")) {
         for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
           if (!cell) continue;
@@ -357,7 +357,7 @@
         }
       }
 
-      if (hoja.includes("equipos")) {
+      if (hoja.includes("eq")) {
         for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
           if (!cell) continue;
