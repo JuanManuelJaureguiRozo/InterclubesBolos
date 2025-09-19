@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parejas Mixtas</title>
+  <link rel="icon" href="../public/favicon_IB.png" type="image/png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+  
+    .contenido {
+      margin: 2rem auto;
+      max-width: 100%;
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+  
+    h1 {
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      background-color: #1b70d9;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  
+    table {
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+  
+    .table-responsive {
+      overflow-x: auto;
+    }
+  
+    .tabla-ajustada th,
+    .tabla-ajustada td {
+      word-wrap: break-word;
+    }
+  
+    .tabla-ajustada th:nth-child(2),
+    .tabla-ajustada td:nth-child(2) {
+      width: 25%;
+    }
+  
+    .navbar-custom {
+      background-color: #1b70d9;
+    }
+  
+    .navbar-custom .nav-link,
+    .navbar-custom .navbar-brand {
+      color: white;
+    }
+  
+    .navbar-custom .dropdown-menu {
+      background-color: white !important;
+      color: black !important;
+      border: 1px solid #1b70d9;
+      box-shadow: none;
+    }
+  
+    .navbar-custom .dropdown-item {
+      color: black !important;
+    }
+  
+    .navbar-custom .dropdown-item:hover {
+      background-color: #91a7a3;
+      color: #000;
+    }
+  
+    .logo-img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      z-index: 1040;
+    }
+
+    .menu-overlay.show {
+      display: block;
+    }
+  
+    /* Menú lateral en móviles + reordenar logo */
+    @media (max-width: 992px) {
+      .navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 75%;
+        height: 100%;
+        background-color: #1b70d9;
+        padding-top: 3.5rem;
+        padding-left: 1rem;
+        z-index: 1050;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+      }
+  
+      .navbar-collapse.show {
+        transform: translateX(0);
+      }
+  
+      .navbar-toggler {
+        z-index: 1100;
+        border: none;
+        background-color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+  
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+      }
+  
+      .navbar-brand {
+        order: 2;
+      }
+  
+      .navbar-toggler {
+        order: 1;
+      }
+  
+      .contenido {
+        padding: 1rem;
+      }
+  
+      table {
+        font-size: 0.85rem;
+      }
+    }
+  </style>  
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      
+      <!-- Botón menú a la izquierda en móviles -->
+      <button class="navbar-toggler order-1 order-lg-0 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Logo y texto a la derecha en móviles -->
+      <a class="navbar-brand fw-bold d-flex align-items-center order-2 order-lg-1 ms-auto" href="../index.html">
+        <img src="../public/logo.png" alt="Logo Interclubes" class="logo-img"> Interclubes Bolos
+      </a>
+  
+      <!-- Menú colapsable -->
+      <div class="collapse navbar-collapse order-3 order-lg-2" id="navbarNavDropdown">
+        <ul class="navbar-nav flex-column flex-lg-row">
+          <!-- HOME -->
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">
+              Inicio
+            </a>
+          </li>          
+          <!-- INTERCUBES HATOGRANDE -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              Interclubes Hatogrande
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../tournaments/individual_femenino.html">Individual Femenino</a></li>
+              <li><a class="dropdown-item" href="../tournaments/individual_masculino.html">Individual Masculino</a></li>
+              <li><a class="dropdown-item" href="../tournaments/parejas.html">Parejas Mixtas</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<div id="menu-overlay" class="menu-overlay"></div>  
+
+<div class="container contenido text-center">
+  <h1>Parejas Mixtas</h1>
+
+  <!-- Indicador de carga -->
+  <div id="loader" class="mt-4 d-flex justify-content-center align-items-center flex-column">
+    <div class="spinner-border text-success" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <p class="mt-3">Cargando resultados, por favor espera...</p>
+  </div>
+
+  <!-- Aquí va la tabla -->
+  <div class="table-responsive mt-4" id="tabla-resultados" style="display:none;"></div>
+  <div id="mejor-pareja" class="mt-4"></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="mt-5 text-center">
+  <div class="container">
+    <p class="mb-2">© 2025 - Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbySS7M3F_DF-LU50M22yOYNu7g5J0RbV4jgnVzOxppkXYGWu3A6zoEVePvzt9cRxI_J/exec?hoja=Parejas%202025-2%20Ordenado";
+
+  async function fetchSheetAsTable(url) {
+    const loader = document.getElementById("loader");
+    const tabla = document.getElementById("tabla-resultados");
+    const mejorPareja = document.getElementById("mejor-pareja");
+
+    try {
+      const res = await fetch(url);
+      const json = await res.json();
+
+      if (!json || !json.headers || !json.data) {
+        loader.innerHTML = `<p class="text-danger mt-3">No se encontraron resultados para mostrar.</p>`;
+        return;
+      }
+
+      const table = document.createElement("table");
+      table.className = "table table-bordered table-striped";
+
+      const thead = document.createElement("thead");
+      const trHead = document.createElement("tr");
+
+      json.headers.forEach(header => {
+        const th = document.createElement("th");
+        th.textContent = header;
+        trHead.appendChild(th);
+      });
+
+      thead.appendChild(trHead);
+      table.appendChild(thead);
+
+      const tbody = document.createElement("tbody");
+
+        json.data.forEach(row => {
+          const tr = document.createElement("tr");
+
+          for (let i = 0; i < json.headers.length; i++) {
+            const td = document.createElement("td");
+            td.textContent = row[i] ?? "";
+            tr.appendChild(td);
+          }
+
+          tbody.appendChild(tr);
+        });
+
+      table.appendChild(tbody);
+
+      if (new URL(url).searchParams.get("hoja")?.toLowerCase().includes("pareja")) {
+        const rows = tbody.querySelectorAll("tr");
+
+        for (let i = 0; i < rows.length; i += 2) {
+          const firstRow = rows[i];
+          const secondRow = rows[i + 1];
+
+          if (!firstRow || !secondRow) continue;
+
+          const totalCols = firstRow.cells.length;
+          const secondLastIdx = totalCols - 2;
+          const lastIdx = totalCols - 1;
+
+          // Verificamos que haya par
+          if (!secondRow) continue;
+
+          // Verificamos que haya celdas suficientes
+          if (
+            firstRow.cells.length <= lastIdx || 
+            secondRow.cells.length <= lastIdx
+          ) continue;
+
+          const lastA = firstRow.cells[lastIdx];
+          const lastB = secondRow.cells[lastIdx];
+
+          // Nos aseguramos de que no sean celdas vacías o nulas
+          if (lastA?.textContent?.trim() !== "" && lastB?.textContent?.trim() !== "") {
+            lastA.rowSpan = 2;
+            lastA.style.textAlign = "center";
+            lastA.classList.add("align-middle");
+            lastB.remove();
+          }
+
+          // --- FUSIONAR PRIMERA COLUMNA ---
+          const firstCell = firstRow.cells[0];
+          const secondCell = secondRow.cells[0];
+
+          if (firstCell && secondCell) {
+            firstCell.rowSpan = 2;
+            firstCell.style.textAlign = "center";
+            firstCell.classList.add("align-middle");
+            secondCell.remove();
+          }
+
+          // --- FUSIONAR PENÚLTIMA COLUMNA ---
+          const secondLastA = firstRow.cells[secondLastIdx];
+          const secondLastB = secondRow.cells[secondLastIdx];
+
+          if (secondLastA && secondLastB) {
+            secondLastA.rowSpan = 2;
+            secondLastA.style.textAlign = "center";
+            secondLastA.classList.add("align-middle");
+            secondLastB.remove();
+          }
+
+          // --- FUSIONAR ÚLTIMA COLUMNA ---
+
+          if (lastA && lastB) {
+            lastA.rowSpan = 2;
+            lastA.style.textAlign = "center";
+            lastA.classList.add("align-middle");
+            lastB.remove();
+          }
+        }
+      }
+
+      const result = resaltarCeldas(table, url);
+
+      tabla.appendChild(table);
+      tabla.style.display = "block";
+
+      // Mostrar mejor línea sin HCP (para parejas)
+      if (result && result.sinHCP.puntaje != 0) {
+
+        const card = document.createElement("div");
+        card.className = "card mt-3 shadow-sm border-success mx-auto";
+        card.style.maxWidth = "400px";
+
+        card.innerHTML = `
+          <div class="card-body text-center">
+            <h5 class="card-title text-success">Línea más alta sin HCP</h5>
+            <p class="card-text mb-1">
+              <strong>${result.sinHCP.jugadores.join(" y ")}</strong><br>
+              hicieron la línea más alta sin HCP en la línea ${result.sinHCP.linea}
+            </p>
+            <h2 class="text-dark">${result.sinHCP.puntaje}</h2>
+          </div>
+        `;
+
+        mejorPareja.appendChild(card);
+      }
+
+      // Mostrar mejor línea con HCP (para parejas)
+      if (result && result.conHCP.puntaje != 0) {
+
+        const card = document.createElement("div");
+        card.className = "card mt-3 shadow-sm border-success mx-auto";
+        card.style.maxWidth = "400px";
+
+        card.innerHTML = `
+          <div class="card-body text-center">
+            <h5 class="card-title text-success">Línea más alta con HCP</h5>
+            <p class="card-text mb-1">
+              <strong>${result.conHCP.jugadores.join(" y ")}</strong><br>
+              hicieron la línea más alta con HCP en la línea ${result.conHCP.linea}
+            </p>
+            <h2 class="text-dark">${result.conHCP.puntaje}</h2>
+          </div>
+        `;
+
+        mejorPareja.appendChild(card);
+      }
+
+    } catch (err) {
+      console.error("Error al cargar la tabla:", err);
+      loader.innerHTML = `<p class="text-danger mt-3">Error al cargar los resultados</p>`;
+      return;
+    }
+
+    loader.remove();
+  }
+
+  function resaltarCeldas(table, url) {
+    const hoja = new URL(url).searchParams.get("hoja")?.toLowerCase() || "";
+    if (hoja.includes("todo evento")) return;
+
+    const rows = table.querySelectorAll("tbody tr");
+    const rows1 = Array.from(table.querySelectorAll("tbody tr"));
+
+    for (let i = 0; i < rows.length; i++) {
+      const cells = rows[i].children;
+
+      if (hoja.includes("individual") || hoja.includes("delegados")) {
+        for (let j = 7; j <= 12; j++) {
+          const cell = cells[j];
+          const value = parseInt(cell?.textContent.trim());
+          if (!isNaN(value) && value >= 200) {
+            cell.style.backgroundColor = "#ffeb3b";
+          }
+        }
+      }
+
+      if (hoja.includes("pareja")) {
+        for (let j = 7; j <= 12; j++) {
+          const cell = cells[j];
+          if (!cell) continue;
+          const value = parseInt(cell.textContent.trim());
+          if (!isNaN(value) && value >= 200) {
+            if (i % 2 === 0) {
+              cell.style.backgroundColor = "#ffeb3b";
+            }
+            if (i % 2 === 1) {
+              if (j != 12) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+          }
+        }
+      }
+
+      if (hoja.includes("ternas")) {
+        for (let j = 7; j <= 12; j++) {
+          const cell = cells[j];
+          if (!cell) continue;
+          const value = parseInt(cell.textContent.trim());
+          if (!isNaN(value) && value >= 200) {
+            if (i % 3 === 0) {
+              cell.style.backgroundColor = "#ffeb3b";
+            }
+            if (i % 3 === 1) {
+              if (j != 12) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+            else {
+              if (j != 12) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+          }
+        }
+      }
+
+      if (hoja.includes("equipos")) {
+        for (let j = 7; j <= 12; j++) {
+          const cell = cells[j];
+          if (!cell) continue;
+          const value = parseInt(cell.textContent.trim());
+          if (!isNaN(value) && value >= 200) {
+            if (i % 6 === 0) {
+              cell.style.backgroundColor = "#ffeb3b";
+            }
+            if (i % 6 === 1) {
+              if (j != 12) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+            if (i % 6 === 2) {
+              if (j != 12) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Header
+    const headers = table.querySelectorAll("thead th");
+    headers.forEach(th => {
+      th.style.backgroundColor = "#1b70d9";
+      th.style.color = "white";
+    });
+
+    // Mayores líneas
+    if (hoja.includes("pareja")) {
+
+      // ------------------------- Lógica Línea sin HCP ------------------------------
+
+      // 1) Construir arreglo con las 10 líneas de cada jugador
+      const lines = rows1.map(row => {
+        return Array.from(row.cells).slice(2, 13).map(cell => cell.innerText.trim());
+      });
+
+      // Ajustar para que los pares de filas queden alineados
+      for (let i = 0; i < lines.length; i++) {
+        if (i % 2 === 0) {
+          lines[i].shift(); // quitar primera celda de los pares
+        } else {
+          lines[i].pop();   // quitar última celda de los impares
+        }
+      }
+
+      // 2) Calcular la línea más alta de todas las parejas
+      let lineaSinHCP = 0;
+      let bestGroupIndex = -1;
+      let maxIndex = -1;
+
+      for (let i = 0; i < lines.length; i += 2) {
+        const group = lines.slice(i, i + 2);
+        const positionalSums = Array(10).fill(0);
+
+        for (let j = 0; j < group.length; j++) {
+          for (let k = 0; k < group[j].length; k++) {
+            positionalSums[k] += parseInt(group[j][k], 10) || 0;
+          }
+        }
+
+        const groupSum = Math.max(...positionalSums);
+        if (groupSum > lineaSinHCP) {
+          lineaSinHCP = groupSum;
+          bestGroupIndex = i;
+          maxIndex = positionalSums.indexOf(groupSum) + 1; // Línea ganadora (L1..L10)
+        }
+      }
+
+      // 3) Obtener los nombres de los jugadores de esa pareja
+      const names_lines = rows1.map(row => {
+        return Array.from(row.cells).slice(0, 8).map(cell => cell.innerText.trim());
+      });
+
+      for (let i = 0; i < names_lines.length; i++) {
+        if (i % 2 === 0) {
+          names_lines[i].shift();
+        } else {
+          names_lines[i].pop();
+        }
+      }
+
+      const nombresParejaMayorLinea = names_lines.slice(bestGroupIndex, bestGroupIndex + 2)
+        .map(arr => arr[0]); // tomar solo nombre del jugador
+
+      // ------------------ Lógica Línea con HCP ---------------------------------------
+
+      const lines1 = rows1.map(row => {
+        return Array.from(row.cells).slice(1, 13).map(cell => cell.innerText.trim());
+      });
+
+        for (let i = 0; i < lines1.length; i++) {
+          if (i % 2 === 0) {
+            lines1[i].shift();
+          } else {
+            lines1[i].pop();
+          }
+        }
+
+        let lineaConHCP = 0;
+        let bestGroupIndex1 = -1;
+        let maxIndex1 = -1;
+
+        for (let i = 0; i < lines1.length; i += 2) {
+          const group1 = lines1.slice(i, i + 2);
+
+          const positionalSums1 = new Array(11).fill(0);
+          for (let j = 0; j < group1.length; j++) {
+            for (let k = 0; k < group1[j].length; k++) {
+              positionalSums1[k] += parseInt(group1[j][k], 10) || 0;
+            }
+          }
+
+          // HCP total está en posición 0
+          const hcpTotal = positionalSums1[0];
+
+          // Sumar HCP a las demás posiciones
+          for (let k = 1; k < positionalSums1.length; k++) {
+            positionalSums1[k] += hcpTotal;
+          }
+
+          const groupSum1 = Math.max(...positionalSums1);
+          if (groupSum1 > lineaConHCP) {
+            if (maxIndex1 === 0) {
+              lineaConHCP = 0;
+              bestGroupIndex1 = -1;
+              maxIndex1 = 0;
+            } else {
+              lineaConHCP = groupSum1;
+              bestGroupIndex1 = i;
+              maxIndex1 = positionalSums1.indexOf(groupSum1);
+            }
+          }
+        }
+
+        const bestGroup1 = lines1.slice(bestGroupIndex1, bestGroupIndex1 + 2);
+        const names_lines1 = Array.from(table.rows).slice(1).map(row => {
+          return Array.from(row.cells).slice(0, 8).map(cell => cell.innerText.trim());
+        });
+
+        for (let i = 0; i < names_lines1.length; i++) {
+          if (i % 2 === 0) {
+            names_lines1[i].shift();
+          } else {
+            names_lines1[i].pop();
+          }
+        }
+
+        const bestGroupNames1 = bestGroup1.map((_, index) => {
+          return names_lines1[bestGroupIndex1 + index].slice(0, 8).join(", ");
+        });
+
+        const nombresParejaMayorLinea1 = bestGroupNames1.map(name => name.split(",")[0]);
+
+        // -------------------------
+        // 3. Retornar resultados
+        // -------------------------
+        return {
+          sinHCP: {
+            linea: `L${maxIndex}`,
+            puntaje: lineaSinHCP,
+            jugadores: nombresParejaMayorLinea,
+          },
+          conHCP: {
+            linea: `L${maxIndex1}`,
+            puntaje: lineaConHCP,
+            jugadores: nombresParejaMayorLinea1,
+          }
+        };
+      }
+
+    return null;
+  }
+
+  fetchSheetAsTable(SHEET_URL);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const navbarCollapse = document.getElementById('navbarNavDropdown');
+  const overlay = document.getElementById('menu-overlay');
+  navbarCollapse.addEventListener('show.bs.collapse', () => {
+    document.body.classList.add('offcanvas-open');
+    overlay.classList.add('show');
+  });
+  navbarCollapse.addEventListener('hide.bs.collapse', () => {
+    document.body.classList.remove('offcanvas-open');
+    overlay.classList.remove('show');
+  });
+  overlay.addEventListener('click', () => {
+    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+    bsCollapse.hide();
+  });
+  
+</script>
+</body>
+</html>
