@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Equipos</title>
+  <title>Todo Evento Masculino</title>
   <link rel="icon" href="../public/favicon_IB.png" type="image/png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -25,7 +25,7 @@
     }
 
     footer {
-      background-color: #1b70d9;
+      background-color: #1c70d9;
       color: white;
       padding: 2rem 1rem;
       text-align: center;
@@ -60,7 +60,7 @@
     }
   
     .navbar-custom {
-      background-color: #1b70d9;
+      background-color: #1c70d9;
     }
   
     .navbar-custom .nav-link,
@@ -71,7 +71,7 @@
     .navbar-custom .dropdown-menu {
       background-color: white !important;
       color: black !important;
-      border: 1px solid #1b70d9;
+      border: 1px solid #1c70d9;
       box-shadow: none;
     }
   
@@ -80,7 +80,7 @@
     }
   
     .navbar-custom .dropdown-item:hover {
-      background-color: #91a7a3;
+      background-color: #f0f0f0;
       color: #000;
     }
   
@@ -111,7 +111,7 @@
         left: 0;
         width: 75%;
         height: 100%;
-        background-color: #1b70d9;
+        background-color: #1c70d9;
         padding-top: 3.5rem;
         padding-left: 1rem;
         z-index: 1050;
@@ -202,14 +202,15 @@
           </li>
         </ul>
       </div>
+  
     </div>
   </nav>
-<div id="menu-overlay" class="menu-overlay"></div>  
+<div id="menu-overlay" class="menu-overlay"></div> 
 
 <div class="container contenido text-center">
-  <h1>Resultados - Equipos</h1>
+  <h1>Resultados - Todo Evento Masculino</h1>
 
-  <!-- ILOADER -->
+  <!-- LOADER -->
   <div id="loader" class="mt-4 d-flex justify-content-center align-items-center flex-column">
     <div class="spinner-border" style="color: #1b70d9" role="status">
       <span class="visually-hidden">Cargando...</span>
@@ -229,7 +230,7 @@
 </footer>
 
 <script>
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxu1NqPwuyQmrddmLgRewBeKnzO4f6ONqehScJopp0YEQvmlQr19mZq4a6hqsOZmIou/exec?hoja=EQX";
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxu1NqPwuyQmrddmLgRewBeKnzO4f6ONqehScJopp0YEQvmlQr19mZq4a6hqsOZmIou/exec?hoja=TEMX";
 
   async function fetchSheetAsTable(url) {
     const loader = document.getElementById("loader");
@@ -273,61 +274,6 @@
 
       table.appendChild(tbody);
 
-      if (new URL(url).searchParams.get("hoja")?.toLowerCase().includes("eq")) {
-        const rows = tbody.querySelectorAll("tr");
-
-        for (let i = 0; i < rows.length; i += 6) {
-          const firstRow = rows[i];
-
-          if (!firstRow) continue;
-
-          // Calcular los índices de las columnas ANTES de modificar celdas
-          const totalCols = firstRow.cells.length;
-          const secondLastIdx = totalCols - 2;
-          const lastIdx = totalCols - 1;
-
-          // --- FUSIONAR PRIMERA COLUMNA ---
-          const firstCell = firstRow.cells[0];
-          if (firstCell) {
-            firstCell.rowSpan = 6;
-            firstCell.style.textAlign = "center";
-            firstCell.classList.add("align-middle");
-          }
-
-          for (let j = 1; j < 6; j++) {
-            const row = rows[i + j];
-            if (row) row.cells[0]?.remove();
-          }
-
-          // --- FUSIONAR PENÚLTIMA COLUMNA ---
-          const secondLastA = firstRow.cells[secondLastIdx];
-          if (secondLastA) {
-            secondLastA.rowSpan = 6;
-            secondLastA.style.textAlign = "center";
-            secondLastA.classList.add("align-middle");
-          }
-
-          for (let j = 1; j < 6; j++) {
-            const row = rows[i + j];
-            if (row) row.cells[secondLastIdx]?.remove();
-          }
-
-          // --- FUSIONAR ÚLTIMA COLUMNA ---
-          const lastA = firstRow.cells[lastIdx];
-          if (lastA) {
-            lastA.rowSpan = 6;
-            lastA.style.textAlign = "center";
-            lastA.classList.add("align-middle");
-          }
-
-          for (let j = 1; j < 6; j++) {
-            const row = rows[i + j];
-            if (row) row.cells[lastIdx]?.remove();
-          }
-        }
-      }
-
-
       resaltarCeldas(table, url);
 
       tabla.appendChild(table);
@@ -344,6 +290,14 @@
 
   function resaltarCeldas(table, url) {
     const hoja = new URL(url).searchParams.get("hoja")?.toLowerCase() || "";
+    
+    // Header
+    const headers = table.querySelectorAll("thead th");
+    headers.forEach(th => {
+      th.style.backgroundColor = "#1b70d9";
+      th.style.color = "white";
+    });
+    
     if (hoja.includes("te")) return;
 
     const rows = table.querySelectorAll("tbody tr");
@@ -351,8 +305,8 @@
     for (let i = 0; i < rows.length; i++) {
       const cells = rows[i].children;
 
-      if (hoja.includes("fem") || hoja.includes("mas") || hoja.includes("del")) {
-        for (let j = 3; j <= 7; j++) {
+      if (hoja.includes("fem") || hoja.includes("mas") ||hoja.includes("del")) {
+        for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
           const value = parseInt(cell?.textContent.trim());
           if (!isNaN(value) && value >= 200) {
@@ -362,38 +316,69 @@
       }
 
       if (hoja.includes("par")) {
-        for (let j = 3; j <= 7; j++) {
+        for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
           if (!cell) continue;
           const value = parseInt(cell.textContent.trim());
           if (!isNaN(value) && value >= 200) {
-            // Asegúrate de que L1 también pueda resaltarse
-            if ((i % 2 === 0 && j !== 3) || (i % 2 === 1 && j !== 7) || j === 3) {
+            if (i % 2 === 0) {
               cell.style.backgroundColor = "#ffeb3b";
+            }
+            if (i % 2 === 1) {
+              if (j != 12) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+          }
+        }
+      }
+
+      if (hoja.includes("ternas")) {
+        for (let j = 7; j <= 12; j++) {
+          const cell = cells[j];
+          if (!cell) continue;
+          const value = parseInt(cell.textContent.trim());
+          if (!isNaN(value) && value >= 200) {
+            if (i % 3 === 0) {
+              cell.style.backgroundColor = "#ffeb3b";
+            }
+            if (i % 3 === 1) {
+              if (j != 12) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+            else {
+              if (j != 12) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
             }
           }
         }
       }
 
       if (hoja.includes("eq")) {
-        for (let j = 2; j <= 7; j++) {
+        for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
-          if (j === 7 && i % 6 !== 0) continue;
           if (!cell) continue;
           const value = parseInt(cell.textContent.trim());
           if (!isNaN(value) && value >= 200) {
-            cell.style.backgroundColor = "#ffeb3b";
+            if (i % 6 === 0) {
+              cell.style.backgroundColor = "#ffeb3b";
+            }
+            if (i % 6 === 1) {
+              if (j != 12) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+            if (i % 6 === 2) {
+              if (j != 12) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
           }
         }
       }
     }
-
-    // Header
-    const headers = table.querySelectorAll("thead th");
-    headers.forEach(th => {
-      th.style.backgroundColor = "#1b70d9";
-      th.style.color = "white";
-    });
   }
 
   fetchSheetAsTable(SHEET_URL);
