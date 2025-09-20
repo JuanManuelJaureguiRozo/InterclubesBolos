@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Equipos</title>
+  <title>Final Masculino</title>
   <link rel="icon" href="../public/favicon_IB.png" type="image/png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -80,7 +80,7 @@
     }
   
     .navbar-custom .dropdown-item:hover {
-      background-color: #91a7a3;
+      background-color: #f0f0f0;
       color: #000;
     }
   
@@ -156,7 +156,7 @@
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-custom">
+   <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container-fluid d-flex justify-content-between align-items-center">
       
       <!-- MENU BUTTON LEFT SIDE MOBILE -->
@@ -177,7 +177,7 @@
             <a class="nav-link" href="../index.html">
               Inicio
             </a>
-          </li>          
+          </li>   
           <!-- MODALIDADES -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
@@ -214,14 +214,15 @@
           </li>
         </ul>
       </div>
+  
     </div>
   </nav>
-<div id="menu-overlay" class="menu-overlay"></div>  
+  <div id="menu-overlay" class="menu-overlay"></div>
 
 <div class="container contenido text-center">
-  <h1>Resultados - Equipos</h1>
+  <h1>Resultados - Final Masculino</h1>
 
-  <!-- ILOADER -->
+  <!-- LOADER -->
   <div id="loader" class="mt-4 d-flex justify-content-center align-items-center flex-column">
     <div class="spinner-border" style="color: #1b70d9" role="status">
       <span class="visually-hidden">Cargando...</span>
@@ -231,6 +232,7 @@
 
   <!-- TABLE -->
   <div class="table-responsive mt-4" id="tabla-resultados" style="display:none;"></div>
+  <!-- <div id="mejor-linea" class="mt-4"></div> -->
 </div>
 
 <!-- FOOTER -->
@@ -241,11 +243,12 @@
 </footer>
 
 <script>
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxu1NqPwuyQmrddmLgRewBeKnzO4f6ONqehScJopp0YEQvmlQr19mZq4a6hqsOZmIou/exec?hoja=EQX";
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxu1NqPwuyQmrddmLgRewBeKnzO4f6ONqehScJopp0YEQvmlQr19mZq4a6hqsOZmIou/exec?hoja=FINALMX";
 
   async function fetchSheetAsTable(url) {
     const loader = document.getElementById("loader");
     const tabla = document.getElementById("tabla-resultados");
+    const mejorLinea = document.getElementById("mejor-linea");
 
     try {
       const res = await fetch(url);
@@ -285,65 +288,28 @@
 
       table.appendChild(tbody);
 
-      if (new URL(url).searchParams.get("hoja")?.toLowerCase().includes("eq")) {
-        const rows = tbody.querySelectorAll("tr");
-
-        for (let i = 0; i < rows.length; i += 6) {
-          const firstRow = rows[i];
-
-          if (!firstRow) continue;
-
-          // Calcular los índices de las columnas ANTES de modificar celdas
-          const totalCols = firstRow.cells.length;
-          const secondLastIdx = totalCols - 2;
-          const lastIdx = totalCols - 1;
-
-          // --- FUSIONAR PRIMERA COLUMNA ---
-          const firstCell = firstRow.cells[0];
-          if (firstCell) {
-            firstCell.rowSpan = 6;
-            firstCell.style.textAlign = "center";
-            firstCell.classList.add("align-middle");
-          }
-
-          for (let j = 1; j < 6; j++) {
-            const row = rows[i + j];
-            if (row) row.cells[0]?.remove();
-          }
-
-          // --- FUSIONAR PENÚLTIMA COLUMNA ---
-          const secondLastA = firstRow.cells[secondLastIdx];
-          if (secondLastA) {
-            secondLastA.rowSpan = 6;
-            secondLastA.style.textAlign = "center";
-            secondLastA.classList.add("align-middle");
-          }
-
-          for (let j = 1; j < 6; j++) {
-            const row = rows[i + j];
-            if (row) row.cells[secondLastIdx]?.remove();
-          }
-
-          // --- FUSIONAR ÚLTIMA COLUMNA ---
-          const lastA = firstRow.cells[lastIdx];
-          if (lastA) {
-            lastA.rowSpan = 6;
-            lastA.style.textAlign = "center";
-            lastA.classList.add("align-middle");
-          }
-
-          for (let j = 1; j < 6; j++) {
-            const row = rows[i + j];
-            if (row) row.cells[lastIdx]?.remove();
-          }
-        }
-      }
-
-
-      resaltarCeldas(table, url);
+      const result = resaltarCeldas(table, url);
 
       tabla.appendChild(table);
       tabla.style.display = "block";
+
+/*       // Mostrar mejor línea
+      if (result && result.maxScore != null) {
+        const { maxScore, maxPlayer } = result;
+        const card = document.createElement("div");
+        card.className = "card mt-3 shadow-sm border-success mx-auto";
+        card.style.maxWidth = "400px";
+        card.innerHTML = `
+          <div class="card-body text-center">
+            <h5 class="card-title text-success">Línea más alta</h5>
+            <p class="card-text mb-1">
+              <strong>${maxPlayer}</strong> hizo la línea más alta
+            </p>
+            <h2 class="text-dark">${maxScore}</h2>
+          </div>
+        `;
+        mejorLinea.appendChild(card);
+      } */
 
     } catch (err) {
       console.error("Error al cargar la tabla:", err);
@@ -361,30 +327,30 @@
     const rows = table.querySelectorAll("tbody tr");
 
     for (let i = 0; i < rows.length; i++) {
-      if (hoja.includes("eq") || hoja.includes("eq")) {
-        // Golden background for top 1 team
-        if (0 <= i && i < 6) {
+      if (hoja.includes("finalfx") || hoja.includes("finalmx")) {
+        // Golden background for top 1
+        if (i === 0) {
           rows[i].querySelectorAll("td").forEach(td => {
             td.style.backgroundColor = "#ffd700";
             td.style.fontWeight = "bold";
           });
         }
         // Silver background for top 2
-        if (6 <= i && i < 12) {
+        if (i === 1) {
           rows[i].querySelectorAll("td").forEach(td => {
             td.style.backgroundColor = "#c0c0c0";
             td.style.fontWeight = "bold";
           });
         }
         // Bronze background for top 3
-        if (12 <= i && i < 18) {
+        if (i === 2) {
           rows[i].querySelectorAll("td").forEach(td => {
             td.style.backgroundColor = "#cd7f32";
             td.style.fontWeight = "bold";
           });
         }
         // Thick border after top 3
-        if (i === 17) {
+        if (i === 2) {
           rows[i].style.borderBottom = "2px solid black";
         }
       }
@@ -393,8 +359,8 @@
     for (let i = 0; i < rows.length; i++) {
       const cells = rows[i].children;
 
-      if (hoja.includes("fem") || hoja.includes("mas") || hoja.includes("del")) {
-        for (let j = 3; j <= 7; j++) {
+      if (hoja.includes("fem") || hoja.includes("mas") ||hoja.includes("del")) {
+        for (let j = 7; j <= 10; j++) {
           const cell = cells[j];
           const value = parseInt(cell?.textContent.trim());
           if (!isNaN(value) && value >= 200) {
@@ -404,23 +370,72 @@
       }
 
       if (hoja.includes("par")) {
-        for (let j = 3; j <= 7; j++) {
+        for (let j = 7; j <= 10; j++) {
           const cell = cells[j];
           if (!cell) continue;
           const value = parseInt(cell.textContent.trim());
           if (!isNaN(value) && value >= 200) {
-            // Asegúrate de que L1 también pueda resaltarse
-            if ((i % 2 === 0 && j !== 3) || (i % 2 === 1 && j !== 7) || j === 3) {
+            if (i % 2 === 0) {
               cell.style.backgroundColor = "#ffeb3b";
+            }
+            if (i % 2 === 1) {
+              if (j != 10) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+          }
+        }
+      }
+
+      if (hoja.includes("ternas")) {
+        for (let j = 7; j <= 10; j++) {
+          const cell = cells[j];
+          if (!cell) continue;
+          const value = parseInt(cell.textContent.trim());
+          if (!isNaN(value) && value >= 200) {
+            if (i % 3 === 0) {
+              cell.style.backgroundColor = "#ffeb3b";
+            }
+            if (i % 3 === 1) {
+              if (j != 10) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+            else {
+              if (j != 10) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
             }
           }
         }
       }
 
       if (hoja.includes("eq")) {
-        for (let j = 2; j <= 7; j++) {
+        for (let j = 7; j <= 10; j++) {
           const cell = cells[j];
-          if (j === 7 && i % 6 !== 0) continue;
+          if (!cell) continue;
+          const value = parseInt(cell.textContent.trim());
+          if (!isNaN(value) && value >= 200) {
+            if (i % 6 === 0) {
+              cell.style.backgroundColor = "#ffeb3b";
+            }
+            if (i % 6 === 1) {
+              if (j != 10) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+            if (i % 6 === 2) {
+              if (j != 10) {
+                cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+          }
+        }
+      }
+
+      if (hoja.includes("final")) {
+        for (let j = 7; j <= 10; j++) {
+          const cell = cells[j];
           if (!cell) continue;
           const value = parseInt(cell.textContent.trim());
           if (!isNaN(value) && value >= 200) {
@@ -436,6 +451,24 @@
       th.style.backgroundColor = "#1b70d9";
       th.style.color = "white";
     });
+
+    // Buscar la mejor línea
+    let maxScore = -Infinity;
+    let maxPlayer = "(desconocido)";
+
+    for (let i = 0; i < rows.length; i++) {
+      const cells = rows[i].children;
+      // recorre todas las columnas de puntuación disponibles
+      for (let j = 7; j < 10; j++) {
+        const v = parseInt(cells[j]?.textContent.trim(), 10);
+        if (!Number.isNaN(v) && v > maxScore) {
+          maxScore = v;
+          maxPlayer = cells[2]?.textContent.trim() || "(desconocido)";
+        }
+      }
+    }
+
+    return Number.isFinite(maxScore) ? { maxScore, maxPlayer } : null;
   }
 
   fetchSheetAsTable(SHEET_URL);

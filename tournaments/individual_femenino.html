@@ -327,6 +327,36 @@
     const rows = table.querySelectorAll("tbody tr");
 
     for (let i = 0; i < rows.length; i++) {
+      if (hoja.includes("fem") || hoja.includes("mas")) {
+        // Golden background for top 1
+        if (i === 0) {
+          rows[i].querySelectorAll("td").forEach(td => {
+            td.style.backgroundColor = "#ffd700";
+            td.style.fontWeight = "bold";
+          });
+        }
+        // Silver background for top 2
+        if (i === 1) {
+          rows[i].querySelectorAll("td").forEach(td => {
+            td.style.backgroundColor = "#c0c0c0";
+            td.style.fontWeight = "bold";
+          });
+        }
+        // Bronze background for top 3
+        if (i === 2) {
+          rows[i].querySelectorAll("td").forEach(td => {
+            td.style.backgroundColor = "#cd7f32";
+            td.style.fontWeight = "bold";
+          });
+        }
+        // Thick border after top 3
+        if (i === 2) {
+          rows[i].style.borderBottom = "2px solid black";
+        }
+      }
+    }
+
+    for (let i = 0; i < rows.length; i++) {
       const cells = rows[i].children;
 
       if (hoja.includes("fem") || hoja.includes("mas") ||hoja.includes("del")) {
