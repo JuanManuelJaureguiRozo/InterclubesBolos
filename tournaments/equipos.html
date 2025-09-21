@@ -177,7 +177,17 @@
             <a class="nav-link" href="../index.html">
               Inicio
             </a>
-          </li>          
+          </li>
+          <!-- GENERAL -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              General
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../general/reglamento.html">Reglamento</a></li>
+              <li><a class="dropdown-item" href="../general/escalafon.html">Escalafón</a></li>
+            </ul>
+          </li>         
           <!-- MODALIDADES -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
@@ -210,16 +220,6 @@
               <li><a class="dropdown-item" href="../tournaments/semifinal_masculino.html">Semifinal Masculino</a></li>
               <li><a class="dropdown-item" href="../tournaments/final_femenino.html">Final Femenino</a></li>
               <li><a class="dropdown-item" href="../tournaments/final_masculino.html">Final Masculino</a></li>
-            </ul>
-          </li>
-          <!-- GENERAL -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-              General
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../general/reglamento.html">Reglamento</a></li>
-              <li><a class="dropdown-item" href="../general/escalafon.html">Escalafón</a></li>
             </ul>
           </li>
         </ul>
@@ -370,33 +370,56 @@
 
     const rows = table.querySelectorAll("tbody tr");
 
+    let allGamesPlayed = true;
+
     for (let i = 0; i < rows.length; i++) {
-      if (hoja.includes("eq") || hoja.includes("eq")) {
-        // Golden background for top 1 team
+      const cells = rows[i].children;
+
+      for (let j = 7; j <= 12; j++) {
+        if ((j === 7 && i % 6 === 0) || (j === 12 && i % 6 !== 0)) {
+          continue;
+        }
+
+        const cell = cells[j];
+        if (!cell || cell.textContent.trim() === "" || cell.textContent.trim() === "0" || cell.textContent.trim() === "-") {
+          console.log("Entré")
+          allGamesPlayed = false;
+          break;
+        }
+      }
+
+      if (!allGamesPlayed) break;
+    }
+
+    if (allGamesPlayed) {
+      for (let i = 0; i < rows.length; i++) {
+      if (hoja.includes("eq")) {
+        // Golden background for top 1
         if (0 <= i && i < 6) {
-          rows[i].querySelectorAll("td").forEach(td => {
-            td.style.backgroundColor = "#ffd700";
-            td.style.fontWeight = "bold";
-          });
+        rows[i].querySelectorAll("td").forEach(td => {
+          td.style.backgroundColor = "#ffd700";
+          td.style.fontWeight = "bold";
+        });
         }
         // Silver background for top 2
         if (6 <= i && i < 12) {
-          rows[i].querySelectorAll("td").forEach(td => {
-            td.style.backgroundColor = "#c0c0c0";
-            td.style.fontWeight = "bold";
-          });
+        rows[i].querySelectorAll("td").forEach(td => {
+          td.style.backgroundColor = "#c0c0c0";
+          td.style.fontWeight = "bold";
+        });
         }
         // Bronze background for top 3
         if (12 <= i && i < 18) {
-          rows[i].querySelectorAll("td").forEach(td => {
-            td.style.backgroundColor = "#cd7f32";
-            td.style.fontWeight = "bold";
-          });
+        rows[i].querySelectorAll("td").forEach(td => {
+          td.style.backgroundColor = "#cd7f32";
+          td.style.fontWeight = "bold";
+        });
         }
         // Thick border after top 3
         if (i === 17) {
-          rows[i].style.borderBottom = "2px solid black";
+        rows[i].style.borderBottom = "2px solid black";
         }
+      }
       }
     }
 
@@ -404,33 +427,61 @@
       const cells = rows[i].children;
 
       if (hoja.includes("fem") || hoja.includes("mas") || hoja.includes("del")) {
-        for (let j = 3; j <= 7; j++) {
+        for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
           const value = parseInt(cell?.textContent.trim());
           if (!isNaN(value) && value >= 200) {
-            cell.style.backgroundColor = "#ffeb3b";
+          cell.style.backgroundColor = "#ffeb3b";
           }
         }
       }
 
       if (hoja.includes("par")) {
-        for (let j = 3; j <= 7; j++) {
+        for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
           if (!cell) continue;
           const value = parseInt(cell.textContent.trim());
           if (!isNaN(value) && value >= 200) {
-            // Asegúrate de que L1 también pueda resaltarse
-            if ((i % 2 === 0 && j !== 3) || (i % 2 === 1 && j !== 7) || j === 3) {
+            if (i % 2 === 0) {
               cell.style.backgroundColor = "#ffeb3b";
+            }
+            if (i % 2 === 1) {
+              if (j != 12) {
+              cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+          }
+        }
+      }
+
+      if (hoja.includes("ternas")) {
+        for (let j = 7; j <= 12; j++) {
+          const cell = cells[j];
+          if (!cell) continue;
+          const value = parseInt(cell.textContent.trim());
+          if (!isNaN(value) && value >= 200) {
+            if (i % 3 === 0) {
+              cell.style.backgroundColor = "#ffeb3b";
+            }
+            if (i % 3 === 1) {
+              if (j != 12) {
+              cell.style.backgroundColor = "#ffeb3b";
+              }
+            }
+            else {
+              if (j != 12) {
+              cell.style.backgroundColor = "#ffeb3b";
+              }
             }
           }
         }
       }
 
       if (hoja.includes("eq")) {
-        for (let j = 2; j <= 7; j++) {
+        for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
-          if (j === 7 && i % 6 !== 0) continue;
+          if (j === 7 && i % 6 === 0) continue;
+          if (j === 12 && i % 6 !== 0) continue;
           if (!cell) continue;
           const value = parseInt(cell.textContent.trim());
           if (!isNaN(value) && value >= 200) {
