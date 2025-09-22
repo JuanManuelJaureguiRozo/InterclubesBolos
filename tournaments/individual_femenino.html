@@ -164,7 +164,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
   
-      <!-- lOGO AND TEXT RIGHT SIDE MOBILE -->
+      <!-- LOGO AND TEXT RIGHT SIDE MOBILE -->
       <a class="navbar-brand fw-bold d-flex align-items-center order-2 order-lg-1 ms-auto" href="../index.html">
         <img src="../public/logo.png" alt="Logo Interclubes" class="logo-img"> Interclubes Bolos
       </a>
@@ -177,16 +177,50 @@
             <a class="nav-link" href="../index.html">
               Inicio
             </a>
-          </li>   
-          <!-- INTERCUBES HATOGRANDE -->
+          </li>
+          <!-- GENERAL -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-              Interclubes Hatogrande
+              General
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../general/reglamento.html">Reglamento</a></li>
+              <li><a class="dropdown-item" href="../general/escalafon.html">Escalafón</a></li>
+              <li><a class="dropdown-item" href="../general/delegados.html">Delegados</a></li>
+            </ul>
+          </li>
+          <!-- MODALIDADES -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              Modalidades
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="../tournaments/individual_femenino.html">Individual Femenino</a></li>
               <li><a class="dropdown-item" href="../tournaments/individual_masculino.html">Individual Masculino</a></li>
               <li><a class="dropdown-item" href="../tournaments/parejas.html">Parejas Mixtas</a></li>
+              <li><a class="dropdown-item" href="../tournaments/equipos.html">Equipos</a></li>
+            </ul>
+          </li>
+          <!-- TODO EVENTOS -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              Todo Evento
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../tournaments/todo_evento_femenino.html">Todo Evento Femenino</a></li>
+              <li><a class="dropdown-item" href="../tournaments/todo_evento_masculino.html">Todo Evento Masculino</a></li>
+            </ul>
+          </li>
+          <!-- FINALES -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              Finales
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../tournaments/semifinal_femenino.html">Semifinal Femenino</a></li>
+              <li><a class="dropdown-item" href="../tournaments/semifinal_masculino.html">Semifinal Masculino</a></li>
+              <li><a class="dropdown-item" href="../tournaments/final_femenino.html">Final Femenino</a></li>
+              <li><a class="dropdown-item" href="../tournaments/final_masculino.html">Final Masculino</a></li>
             </ul>
           </li>
         </ul>
@@ -197,19 +231,18 @@
   <div id="menu-overlay" class="menu-overlay"></div>
 
 <div class="container contenido text-center">
-  <h1>Individual Femenino</h1>
+  <h1>Resultados - Individual Femenino</h1>
 
-  <!-- Indicador de carga -->
+  <!-- LOADER -->
   <div id="loader" class="mt-4 d-flex justify-content-center align-items-center flex-column">
-    <div class="spinner-border text-success" role="status">
+    <div class="spinner-border" style="color: #1b70d9" role="status">
       <span class="visually-hidden">Cargando...</span>
     </div>
     <p class="mt-3">Cargando resultados, por favor espera...</p>
   </div>
 
-  <!-- Aquí va la tabla -->
+  <!-- TABLE -->
   <div class="table-responsive mt-4" id="tabla-resultados" style="display:none;"></div>
-  <div id="mejor-linea" class="mt-4"></div>
 </div>
 
 <!-- FOOTER -->
@@ -220,12 +253,11 @@
 </footer>
 
 <script>
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbycSAYRd7RtVShWDAuQj4Fiy5HKnOt_PK1i3Ap0k287aZqOxteCMfJI6H26nWRvGc2PHA/exec?hoja=Individual%20Femenino%202025-2%20Ordenado";
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxu1NqPwuyQmrddmLgRewBeKnzO4f6ONqehScJopp0YEQvmlQr19mZq4a6hqsOZmIou/exec?hoja=FEMX";
 
   async function fetchSheetAsTable(url) {
     const loader = document.getElementById("loader");
     const tabla = document.getElementById("tabla-resultados");
-    const mejorLinea = document.getElementById("mejor-linea");
 
     try {
       const res = await fetch(url);
@@ -270,24 +302,6 @@
       tabla.appendChild(table);
       tabla.style.display = "block";
 
-      // Mostrar mejor línea
-      if (result && result.maxScore != null) {
-        const { maxScore, maxPlayer } = result;
-        const card = document.createElement("div");
-        card.className = "card mt-3 shadow-sm border-success mx-auto";
-        card.style.maxWidth = "400px";
-        card.innerHTML = `
-          <div class="card-body text-center">
-            <h5 class="card-title text-success">Línea más alta</h5>
-            <p class="card-text mb-1">
-              <strong>${maxPlayer}</strong> hizo la línea más alta
-            </p>
-            <h2 class="text-dark">${maxScore}</h2>
-          </div>
-        `;
-        mejorLinea.appendChild(card);
-      }
-
     } catch (err) {
       console.error("Error al cargar la tabla:", err);
       loader.innerHTML = `<p class="text-danger mt-3">Error al cargar los resultados</p>`;
@@ -299,14 +313,57 @@
 
   function resaltarCeldas(table, url) {
     const hoja = new URL(url).searchParams.get("hoja")?.toLowerCase() || "";
-    if (hoja.includes("todo evento")) return;
 
     const rows = table.querySelectorAll("tbody tr");
+
+    let allGamesPlayed = true;
+
+    rows.forEach(row => {
+      for (let j = 8; j <= 12; j++) {
+        const cell = row.children[j];
+        if (!cell || cell.textContent.trim() === "" || cell.textContent.trim() === "-") {
+          allGamesPlayed = false;
+          break;
+        }
+      }
+    });
+
+    if (allGamesPlayed) {
+      for (let i = 0; i < rows.length; i++) {
+        if (hoja.includes("fem")) {
+
+          if (i === 0) {
+          rows[i].querySelectorAll("td").forEach(td => {
+            td.style.backgroundColor = "#ffd700";
+            td.style.fontWeight = "bold";
+          });
+          }
+
+          if (i === 1) {
+          rows[i].querySelectorAll("td").forEach(td => {
+            td.style.backgroundColor = "#c0c0c0";
+            td.style.fontWeight = "bold";
+          });
+          }
+
+          if (i === 2) {
+          rows[i].querySelectorAll("td").forEach(td => {
+            td.style.backgroundColor = "#cd7f32";
+            td.style.fontWeight = "bold";
+          });
+          }
+
+          if (i === 2) {
+          rows[i].style.borderBottom = "2px solid black";
+          }
+        }
+      }
+    }
 
     for (let i = 0; i < rows.length; i++) {
       const cells = rows[i].children;
 
-      if (hoja.includes("individual") || hoja.includes("delegados")) {
+      if (hoja.includes("fem")) {
         for (let j = 7; j <= 12; j++) {
           const cell = cells[j];
           const value = parseInt(cell?.textContent.trim());
@@ -315,96 +372,13 @@
           }
         }
       }
-
-      if (hoja.includes("pareja")) {
-        for (let j = 7; j <= 12; j++) {
-          const cell = cells[j];
-          if (!cell) continue;
-          const value = parseInt(cell.textContent.trim());
-          if (!isNaN(value) && value >= 200) {
-            if (i % 2 === 0) {
-              cell.style.backgroundColor = "#ffeb3b";
-            }
-            if (i % 2 === 1) {
-              if (j != 12) {
-                cell.style.backgroundColor = "#ffeb3b";
-              }
-            }
-          }
-        }
-      }
-
-      if (hoja.includes("ternas")) {
-        for (let j = 7; j <= 12; j++) {
-          const cell = cells[j];
-          if (!cell) continue;
-          const value = parseInt(cell.textContent.trim());
-          if (!isNaN(value) && value >= 200) {
-            if (i % 3 === 0) {
-              cell.style.backgroundColor = "#ffeb3b";
-            }
-            if (i % 3 === 1) {
-              if (j != 12) {
-                cell.style.backgroundColor = "#ffeb3b";
-              }
-            }
-            else {
-              if (j != 12) {
-                cell.style.backgroundColor = "#ffeb3b";
-              }
-            }
-          }
-        }
-      }
-
-      if (hoja.includes("equipos")) {
-        for (let j = 7; j <= 12; j++) {
-          const cell = cells[j];
-          if (!cell) continue;
-          const value = parseInt(cell.textContent.trim());
-          if (!isNaN(value) && value >= 200) {
-            if (i % 6 === 0) {
-              cell.style.backgroundColor = "#ffeb3b";
-            }
-            if (i % 6 === 1) {
-              if (j != 12) {
-                cell.style.backgroundColor = "#ffeb3b";
-              }
-            }
-            if (i % 6 === 2) {
-              if (j != 12) {
-                cell.style.backgroundColor = "#ffeb3b";
-              }
-            }
-          }
-        }
-      }
     }
 
-    // Header
     const headers = table.querySelectorAll("thead th");
     headers.forEach(th => {
       th.style.backgroundColor = "#1b70d9";
       th.style.color = "white";
     });
-
-    // Buscar la mejor línea
-    let maxScore = -Infinity;
-    let maxPlayer = "(desconocido)";
-
-    for (let i = 0; i < rows.length; i++) {
-      const cells = rows[i].children;
-      // recorre todas las columnas de puntuación disponibles
-      for (let j = 7; j < 12; j++) {
-        const v = parseInt(cells[j]?.textContent.trim(), 10);
-        if (!Number.isNaN(v) && v > maxScore) {
-          maxScore = v;
-          maxPlayer = cells[2]?.textContent.trim() || "(desconocido)";
-        }
-      }
-    }
-
-    return Number.isFinite(maxScore) ? { maxScore, maxPlayer } : null;
   }
 
   fetchSheetAsTable(SHEET_URL);

@@ -3,25 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Individual Masculino</title>
+  <title>Interclubes Bolos</title>
   <link rel="icon" href="../public/favicon_IB.png" type="image/png">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     body {
-      background-color: #f5f5f5;
+      background-color: #f8f9fa;
+      color: black;
     }
-  
-    .contenido {
-      margin: 2rem auto;
-      max-width: 100%;
-      background-color: #ffffff;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+    /* HERO */
+    .hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
     }
-  
-    h1 {
-      margin-bottom: 2rem;
+
+    .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    }
+
+    .hero-content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    }
+
+    .title-section {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: #f9f9f9;
+    }
+
+    .title-section .title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #1b70d9;
+    margin-bottom: 1rem;
+    }
+
+    .title-section .subtitle {
+    font-size: 1.3rem;
+    color: #444;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+    }
+
+    /* GENERAL STYLES */
+    .section-title {
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
     }
 
     footer {
@@ -38,25 +81,6 @@
 
     footer a:hover {
       text-decoration: underline;
-    }
-  
-    table {
-      font-size: 0.95rem;
-      white-space: nowrap;
-    }
-  
-    .table-responsive {
-      overflow-x: auto;
-    }
-  
-    .tabla-ajustada th,
-    .tabla-ajustada td {
-      word-wrap: break-word;
-    }
-  
-    .tabla-ajustada th:nth-child(2),
-    .tabla-ajustada td:nth-child(2) {
-      width: 25%;
     }
   
     .navbar-custom {
@@ -88,6 +112,14 @@
       height: 40px;
       margin-right: 10px;
     }
+  
+    .contenido {
+      background-color: rgba(255, 255, 255, 0.6);
+      padding: 2rem;
+      border-radius: 40px;
+      border : 1px solid #000000;
+      margin-top: 2rem;
+    }
 
     .menu-overlay {
       display: none;
@@ -103,7 +135,8 @@
     .menu-overlay.show {
       display: block;
     }
-  
+
+    /* MOBILE STYLES */
     @media (max-width: 992px) {
       .navbar-collapse {
         position: fixed;
@@ -111,7 +144,7 @@
         left: 0;
         width: 75%;
         height: 100%;
-        background-color: #1b70d9;
+        background-color: #1b70d9 !important;
         padding-top: 3.5rem;
         padding-left: 1rem;
         z-index: 1050;
@@ -135,23 +168,39 @@
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
       }
   
-      .navbar-brand {
-        order: 2;
-      }
-  
-      .navbar-toggler {
-        order: 1;
-      }
-  
-      .contenido {
-        padding: 1rem;
-      }
-  
-      table {
-        font-size: 0.85rem;
+      body.offcanvas-open {
+        overflow: hidden;
       }
     }
-  </style>  
+
+    .viewer {
+      margin: 2rem 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    iframe {
+      width: 100%;
+      height: 80vh;
+      border: none;
+    }
+    .actions {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .btn {
+      display: inline-block;
+      background: #1b70d9;
+      color: white;
+      padding: 0.7rem 1.2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #1b70d9;
+    }
+  </style>
 </head>
 <body>
 
@@ -177,7 +226,7 @@
             <a class="nav-link" href="../index.html">
               Inicio
             </a>
-          </li>
+          </li>  
           <!-- GENERAL -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
@@ -188,17 +237,17 @@
               <li><a class="dropdown-item" href="../general/escalafon.html">Escalafón</a></li>
               <li><a class="dropdown-item" href="../general/delegados.html">Delegados</a></li>
             </ul>
-          </li> 
+          </li>
           <!-- MODALIDADES -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
               Modalidades
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../tournaments/individual_femenino.html">Individual Femenino</a></li>
-              <li><a class="dropdown-item" href="../tournaments/individual_masculino.html">Individual Masculino</a></li>
-              <li><a class="dropdown-item" href="../tournaments/parejas.html">Parejas Mixtas</a></li>
-              <li><a class="dropdown-item" href="../tournaments/equipos.html">Equipos</a></li>
+              <li><a class="dropdown-item" href="tournaments/individual_femenino.html">Individual Femenino</a></li>
+              <li><a class="dropdown-item" href="tournaments/individual_masculino.html">Individual Masculino</a></li>
+              <li><a class="dropdown-item" href="tournaments/parejas.html">Parejas Mixtas</a></li>
+              <li><a class="dropdown-item" href="tournaments/equipos.html">Equipos</a></li>
             </ul>
           </li>
           <!-- TODO EVENTOS -->
@@ -230,20 +279,17 @@
   </nav>
   <div id="menu-overlay" class="menu-overlay"></div>
 
-<div class="container contenido text-center">
-  <h1>Resultados - Individual Masculino</h1>
+  <div class="container contenido text-center">
+    <h1>Reglamento</h1>
 
-  <!-- LOADER -->
-  <div id="loader" class="mt-4 d-flex justify-content-center align-items-center flex-column">
-    <div class="spinner-border" style="color: #1b70d9" role="status">
-      <span class="visually-hidden">Cargando...</span>
+    <div class="viewer" style="height:90vh;">
+      <iframe src="reglamento.pdf" style="height:100%; min-height:600px;"></iframe>
     </div>
-    <p class="mt-3">Cargando resultados, por favor espera...</p>
-  </div>
 
-  <!-- TABLE -->
-  <div class="table-responsive mt-4" id="tabla-resultados" style="display:none;"></div>
-</div>
+    <div class="actions">
+      <a class="btn" href="reglamento.pdf" target="_blank">📥 Abrir / Descargar PDF</a>
+    </div>
+  </div>
 
 <!-- FOOTER -->
 <footer class="mt-5 text-center">
@@ -251,138 +297,6 @@
     <p class="mb-2">© 2025 - Todos los derechos reservados.</p>
   </div>
 </footer>
-
-<script>
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxu1NqPwuyQmrddmLgRewBeKnzO4f6ONqehScJopp0YEQvmlQr19mZq4a6hqsOZmIou/exec?hoja=MASX";
-
-  async function fetchSheetAsTable(url) {
-    const loader = document.getElementById("loader");
-    const tabla = document.getElementById("tabla-resultados");
-
-    try {
-      const res = await fetch(url);
-      const json = await res.json();
-
-      if (!json || !json.headers || !json.data) {
-        loader.innerHTML = `<p class="text-danger mt-3">No se encontraron resultados para mostrar.</p>`;
-        return;
-      }
-
-      const table = document.createElement("table");
-      table.className = "table table-bordered table-striped";
-
-      const thead = document.createElement("thead");
-      const trHead = document.createElement("tr");
-
-      json.headers.forEach(header => {
-        const th = document.createElement("th");
-        th.textContent = header;
-        trHead.appendChild(th);
-      });
-
-      thead.appendChild(trHead);
-      table.appendChild(thead);
-
-      const tbody = document.createElement("tbody");
-
-      json.data.forEach(row => {
-        const tr = document.createElement("tr");
-        row.forEach(cell => {
-          const td = document.createElement("td");
-          td.textContent = cell;
-          tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
-      });
-
-      table.appendChild(tbody);
-
-      const result = resaltarCeldas(table, url);
-
-      tabla.appendChild(table);
-      tabla.style.display = "block";
-
-    } catch (err) {
-      console.error("Error al cargar la tabla:", err);
-      loader.innerHTML = `<p class="text-danger mt-3">Error al cargar los resultados</p>`;
-      return;
-    }
-
-    loader.remove();
-  }
-
-  function resaltarCeldas(table, url) {
-    const hoja = new URL(url).searchParams.get("hoja")?.toLowerCase() || "";
-
-    const rows = table.querySelectorAll("tbody tr");
-
-    let allGamesPlayed = true;
-
-    rows.forEach(row => {
-      for (let j = 8; j <= 12; j++) {
-        const cell = row.children[j];
-        if (!cell || cell.textContent.trim() === "" || cell.textContent.trim() === "-") {
-          allGamesPlayed = false;
-          break;
-        }
-      }
-    });
-
-    if (allGamesPlayed) {
-      for (let i = 0; i < rows.length; i++) {
-        if (hoja.includes("mas")) {
-
-          if (i === 0) {
-          rows[i].querySelectorAll("td").forEach(td => {
-            td.style.backgroundColor = "#ffd700";
-            td.style.fontWeight = "bold";
-          });
-          }
-
-          if (i === 1) {
-          rows[i].querySelectorAll("td").forEach(td => {
-            td.style.backgroundColor = "#c0c0c0";
-            td.style.fontWeight = "bold";
-          });
-          }
-
-          if (i === 2) {
-          rows[i].querySelectorAll("td").forEach(td => {
-            td.style.backgroundColor = "#cd7f32";
-            td.style.fontWeight = "bold";
-          });
-          }
-
-          if (i === 2) {
-          rows[i].style.borderBottom = "2px solid black";
-          }
-        }
-      }
-    }
-
-    for (let i = 0; i < rows.length; i++) {
-      const cells = rows[i].children;
-
-      if (hoja.includes("mas")) {
-        for (let j = 7; j <= 12; j++) {
-          const cell = cells[j];
-          const value = parseInt(cell?.textContent.trim());
-          if (!isNaN(value) && value >= 200) {
-            cell.style.backgroundColor = "#ffeb3b";
-          }
-        }
-      }
-    }
-
-    const headers = table.querySelectorAll("thead th");
-    headers.forEach(th => {
-      th.style.backgroundColor = "#1b70d9";
-      th.style.color = "white";
-    });
-  }
-
-  fetchSheetAsTable(SHEET_URL);
-</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
