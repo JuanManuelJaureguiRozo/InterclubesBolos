@@ -18,8 +18,15 @@
       background-size: cover;
       background-position: center;
       color: white;
-      padding: 24rem 1rem;
       text-align: center;
+      padding: 8rem 1rem; /* default = mobile first */
+    }
+
+    /* Desktop breakpoint */
+    @media (min-width: 1024px) {
+      .hero-section {
+        padding: 24rem 1rem;
+      }
     }
 
     .title-section {
