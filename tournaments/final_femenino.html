@@ -243,7 +243,6 @@
 
   <!-- TABLE -->
   <div class="table-responsive mt-4" id="tabla-resultados" style="display:none;"></div>
-  <!-- <div id="mejor-linea" class="mt-4"></div> -->
 </div>
 
 <!-- FOOTER -->
@@ -259,7 +258,6 @@
   async function fetchSheetAsTable(url) {
     const loader = document.getElementById("loader");
     const tabla = document.getElementById("tabla-resultados");
-    const mejorLinea = document.getElementById("mejor-linea");
 
     try {
       const res = await fetch(url);
@@ -304,24 +302,6 @@
       tabla.appendChild(table);
       tabla.style.display = "block";
 
-/*       // Mostrar mejor línea
-      if (result && result.maxScore != null) {
-        const { maxScore, maxPlayer } = result;
-        const card = document.createElement("div");
-        card.className = "card mt-3 shadow-sm border-success mx-auto";
-        card.style.maxWidth = "400px";
-        card.innerHTML = `
-          <div class="card-body text-center">
-            <h5 class="card-title text-success">Línea más alta</h5>
-            <p class="card-text mb-1">
-              <strong>${maxPlayer}</strong> hizo la línea más alta
-            </p>
-            <h2 class="text-dark">${maxScore}</h2>
-          </div>
-        `;
-        mejorLinea.appendChild(card);
-      } */
-
     } catch (err) {
       console.error("Error al cargar la tabla:", err);
       loader.innerHTML = `<p class="text-danger mt-3">Error al cargar los resultados</p>`;
@@ -333,7 +313,6 @@
 
   function resaltarCeldas(table, url) {
     const hoja = new URL(url).searchParams.get("hoja")?.toLowerCase() || "";
-    if (hoja.includes("te")) return;
 
     const rows = table.querySelectorAll("tbody tr");
 
@@ -351,112 +330,38 @@
 
     if (allGamesPlayed) {
       for (let i = 0; i < rows.length; i++) {
-      if (hoja.includes("fem") || hoja.includes("mas")) {
-        // Golden background for top 1
-        if (i === 0) {
-        rows[i].querySelectorAll("td").forEach(td => {
-          td.style.backgroundColor = "#ffd700";
-          td.style.fontWeight = "bold";
-        });
-        }
-        // Silver background for top 2
-        if (i === 1) {
-        rows[i].querySelectorAll("td").forEach(td => {
-          td.style.backgroundColor = "#c0c0c0";
-          td.style.fontWeight = "bold";
-        });
-        }
-        // Bronze background for top 3
-        if (i === 2) {
-        rows[i].querySelectorAll("td").forEach(td => {
-          td.style.backgroundColor = "#cd7f32";
-          td.style.fontWeight = "bold";
-        });
-        }
-        // Thick border after top 3
-        if (i === 2) {
-        rows[i].style.borderBottom = "2px solid black";
-        }
-      }
+        if (hoja.includes("final")) {
+
+          if (i === 0) {
+          rows[i].querySelectorAll("td").forEach(td => {
+            td.style.backgroundColor = "#ffd700";
+            td.style.fontWeight = "bold";
+          });
+          }
+
+          if (i === 1) {
+          rows[i].querySelectorAll("td").forEach(td => {
+            td.style.backgroundColor = "#c0c0c0";
+            td.style.fontWeight = "bold";
+          });
+          }
+
+          if (i === 2) {
+          rows[i].querySelectorAll("td").forEach(td => {
+            td.style.backgroundColor = "#cd7f32";
+            td.style.fontWeight = "bold";
+          });
+          }
+
+          if (i === 2) {
+          rows[i].style.borderBottom = "2px solid black";
+          }
+        } 
       }
     }
 
     for (let i = 0; i < rows.length; i++) {
       const cells = rows[i].children;
-
-      if (hoja.includes("fem") || hoja.includes("mas") ||hoja.includes("del")) {
-        for (let j = 7; j <= 10; j++) {
-          const cell = cells[j];
-          const value = parseInt(cell?.textContent.trim());
-          if (!isNaN(value) && value >= 200) {
-            cell.style.backgroundColor = "#ffeb3b";
-          }
-        }
-      }
-
-      if (hoja.includes("par")) {
-        for (let j = 7; j <= 10; j++) {
-          const cell = cells[j];
-          if (!cell) continue;
-          const value = parseInt(cell.textContent.trim());
-          if (!isNaN(value) && value >= 200) {
-            if (i % 2 === 0) {
-              cell.style.backgroundColor = "#ffeb3b";
-            }
-            if (i % 2 === 1) {
-              if (j != 10) {
-                cell.style.backgroundColor = "#ffeb3b";
-              }
-            }
-          }
-        }
-      }
-
-      if (hoja.includes("ternas")) {
-        for (let j = 7; j <= 10; j++) {
-          const cell = cells[j];
-          if (!cell) continue;
-          const value = parseInt(cell.textContent.trim());
-          if (!isNaN(value) && value >= 200) {
-            if (i % 3 === 0) {
-              cell.style.backgroundColor = "#ffeb3b";
-            }
-            if (i % 3 === 1) {
-              if (j != 10) {
-                cell.style.backgroundColor = "#ffeb3b";
-              }
-            }
-            else {
-              if (j != 10) {
-                cell.style.backgroundColor = "#ffeb3b";
-              }
-            }
-          }
-        }
-      }
-
-      if (hoja.includes("eq")) {
-        for (let j = 7; j <= 10; j++) {
-          const cell = cells[j];
-          if (!cell) continue;
-          const value = parseInt(cell.textContent.trim());
-          if (!isNaN(value) && value >= 200) {
-            if (i % 6 === 0) {
-              cell.style.backgroundColor = "#ffeb3b";
-            }
-            if (i % 6 === 1) {
-              if (j != 10) {
-                cell.style.backgroundColor = "#ffeb3b";
-              }
-            }
-            if (i % 6 === 2) {
-              if (j != 10) {
-                cell.style.backgroundColor = "#ffeb3b";
-              }
-            }
-          }
-        }
-      }
 
       if (hoja.includes("final")) {
         for (let j = 7; j <= 10; j++) {
@@ -470,30 +375,11 @@
       }
     }
 
-    // Header
     const headers = table.querySelectorAll("thead th");
     headers.forEach(th => {
       th.style.backgroundColor = "#1b70d9";
       th.style.color = "white";
     });
-
-    // Buscar la mejor línea
-    let maxScore = -Infinity;
-    let maxPlayer = "(desconocido)";
-
-    for (let i = 0; i < rows.length; i++) {
-      const cells = rows[i].children;
-      // recorre todas las columnas de puntuación disponibles
-      for (let j = 7; j < 10; j++) {
-        const v = parseInt(cells[j]?.textContent.trim(), 10);
-        if (!Number.isNaN(v) && v > maxScore) {
-          maxScore = v;
-          maxPlayer = cells[2]?.textContent.trim() || "(desconocido)";
-        }
-      }
-    }
-
-    return Number.isFinite(maxScore) ? { maxScore, maxPlayer } : null;
   }
 
   fetchSheetAsTable(SHEET_URL);
