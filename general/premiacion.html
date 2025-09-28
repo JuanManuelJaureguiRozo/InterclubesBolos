@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Individual Masculino</title>
+  <title>Premiación</title>
   <link rel="icon" href="../public/favicon_IB.png" type="image/png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -19,13 +19,9 @@
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-  
-    h1 {
-      margin-bottom: 2rem;
-    }
 
     footer {
-      background-color: #1b70d9;
+      background-color: #1c70d9;
       color: white;
       padding: 2rem 1rem;
       text-align: center;
@@ -38,6 +34,10 @@
 
     footer a:hover {
       text-decoration: underline;
+    }
+  
+    h1 {
+      margin-bottom: 2rem;
     }
   
     table {
@@ -60,7 +60,7 @@
     }
   
     .navbar-custom {
-      background-color: #1b70d9;
+      background-color: #1c70d9;
     }
   
     .navbar-custom .nav-link,
@@ -71,7 +71,7 @@
     .navbar-custom .dropdown-menu {
       background-color: white !important;
       color: black !important;
-      border: 1px solid #1b70d9;
+      border: 1px solid #1c70d9;
       box-shadow: none;
     }
   
@@ -111,7 +111,7 @@
         left: 0;
         width: 75%;
         height: 100%;
-        background-color: #1b70d9;
+        background-color: #1c70d9;
         padding-top: 3.5rem;
         padding-left: 1rem;
         z-index: 1050;
@@ -155,28 +155,28 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
-   <nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
-      
-      <!-- MENU BUTTON LEFT SIDE MOBILE -->
-      <button class="navbar-toggler order-1 order-lg-0 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <!-- LOGO AND TEXT RIGHT SIDE MOBILE -->
-      <a class="navbar-brand fw-bold d-flex align-items-center order-2 order-lg-1 ms-auto" href="../index.html">
-        <img src="../public/logo.png" alt="Logo Interclubes" class="logo-img"> Interclubes Bolos
-      </a>
-  
-      <!-- COLLAPSABLE MENU -->
-      <div class="collapse navbar-collapse order-3 order-lg-2" id="navbarNavDropdown">
-        <ul class="navbar-nav flex-column flex-lg-row">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+        
+        <!-- MENU BUTTON LEFT SIDE MOBILE -->
+        <button class="navbar-toggler order-1 order-lg-0 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <!-- LOGO AND TEST RIGHT SIDE MOBILE -->
+        <a class="navbar-brand fw-bold d-flex align-items-center order-2 order-lg-1 ms-auto" href="../index.html">
+            <img src="../public/logo.png" alt="Logo Interclubes" class="logo-img"> Interclubes Bolos
+        </a>
+    
+        <!-- COLLAPSBLE MENU -->
+        <div class="collapse navbar-collapse order-3 order-lg-2" id="navbarNavDropdown">
+          <ul class="navbar-nav flex-column flex-lg-row">
           <!-- HOME -->
           <li class="nav-item">
-            <a class="nav-link" href="../index.html">
+              <a class="nav-link" href="../index.html">
               Inicio
-            </a>
+              </a>
           </li>
           <!-- GENERAL -->
           <li class="nav-item dropdown">
@@ -191,17 +191,17 @@
               <li><a class="dropdown-item" href="../general/delegados.html">Delegados</a></li>
               <li><a class="dropdown-item" href="../general/premiacion.html">Premiación</a></li>
             </ul>
-          </li> 
+          </li>
           <!-- MODALIDADES -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
               Modalidades
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../tournaments/individual_femenino.html">Individual Femenino</a></li>
-              <li><a class="dropdown-item" href="../tournaments/individual_masculino.html">Individual Masculino</a></li>
-              <li><a class="dropdown-item" href="../tournaments/parejas.html">Parejas Mixtas</a></li>
-              <li><a class="dropdown-item" href="../tournaments/equipos.html">Equipos</a></li>
+              <li><a class="dropdown-item" href="tournaments/individual_femenino.html">Individual Femenino</a></li>
+              <li><a class="dropdown-item" href="tournaments/individual_masculino.html">Individual Masculino</a></li>
+              <li><a class="dropdown-item" href="tournaments/parejas.html">Parejas Mixtas</a></li>
+              <li><a class="dropdown-item" href="tournaments/equipos.html">Equipos</a></li>
             </ul>
           </li>
           <!-- TODO EVENTOS -->
@@ -226,15 +226,14 @@
               <li><a class="dropdown-item" href="../tournaments/final_masculino.html">Final Masculino</a></li>
             </ul>
           </li>
-        </ul>
-      </div>
-  
+          </ul>
+        </div>
     </div>
-  </nav>
-  <div id="menu-overlay" class="menu-overlay"></div>
+</nav>  
+<div id="menu-overlay" class="menu-overlay"></div>  
 
 <div class="container contenido text-center">
-  <h1>Resultados - Individual Masculino</h1>
+  <h1>Premiación</h1>
 
   <!-- LOADER -->
   <div id="loader" class="mt-4 d-flex justify-content-center align-items-center flex-column">
@@ -256,7 +255,7 @@
 </footer>
 
 <script>
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxu1NqPwuyQmrddmLgRewBeKnzO4f6ONqehScJopp0YEQvmlQr19mZq4a6hqsOZmIou/exec?hoja=MASX";
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxu1NqPwuyQmrddmLgRewBeKnzO4f6ONqehScJopp0YEQvmlQr19mZq4a6hqsOZmIou/exec?hoja=PREMIACION";
 
   async function fetchSheetAsTable(url) {
     const loader = document.getElementById("loader");
@@ -300,7 +299,157 @@
 
       table.appendChild(tbody);
 
-      const result = resaltarCeldas(table, url);
+      const rows = Array.from(tbody.querySelectorAll("tr"));
+
+      rows.forEach(row => {
+        Array.from(row.cells).forEach((cell, idx) => {
+          cell.dataset.origCol = String(idx);
+        });
+      });
+
+      for (let start = 0; start < 9; start += 3) {
+        const firstCell = Array.from(rows[start].cells).find(c => c.dataset.origCol === "0");
+        if (!firstCell) continue;
+
+        firstCell.rowSpan = 3;
+        firstCell.style.verticalAlign = "middle";
+        firstCell.style.textAlign = "center";
+
+        for (let i = 1; i < 3; i++) {
+          const belowCell = Array.from(rows[start + i].cells).find(c => c.dataset.origCol === "0");
+          if (belowCell) belowCell.remove();
+        }
+      }
+
+      for (let start = 33; start < 45; start += 3) {
+        const firstCell = Array.from(rows[start].cells).find(c => c.dataset.origCol === "0");
+        if (!firstCell) continue;
+
+        firstCell.rowSpan = 3;
+        firstCell.style.verticalAlign = "middle";
+        firstCell.style.textAlign = "center";
+
+        for (let i = 1; i < 3; i++) {
+          const belowCell = Array.from(rows[start + i].cells).find(c => c.dataset.origCol === "0");
+          if (belowCell) belowCell.remove();
+        }
+      }
+
+      for (let start = 9; start < 15; start += 6) {
+        const firstCell = Array.from(rows[start].cells).find(c => c.dataset.origCol === "0");
+        if (!firstCell) continue;
+
+        firstCell.rowSpan = 6;
+        firstCell.style.verticalAlign = "middle";
+        firstCell.style.textAlign = "center";
+
+        for (let i = 1; i < 6; i++) {
+          const belowCell = Array.from(rows[start + i].cells).find(c => c.dataset.origCol === "0");
+          if (belowCell) belowCell.remove();
+        }
+      }
+
+      for (let start = 15; start < 33; start += 18) {
+        const firstCell = Array.from(rows[start].cells).find(c => c.dataset.origCol === "0");
+        if (!firstCell) continue;
+
+        firstCell.rowSpan = 18;
+        firstCell.style.verticalAlign = "middle";
+        firstCell.style.textAlign = "center";
+
+        for (let i = 1; i < 18; i++) {
+          const belowCell = Array.from(rows[start + i].cells).find(c => c.dataset.origCol === "0");
+          if (belowCell) belowCell.remove();
+        }
+      }
+
+      for (let start = 9; start < 15; start += 2) {
+        const firstCell = Array.from(rows[start].cells).find(c => c.dataset.origCol === "1");
+        if (!firstCell) continue;
+
+        firstCell.rowSpan = 2;
+        firstCell.style.verticalAlign = "middle";
+        firstCell.style.textAlign = "center";
+
+        const belowCell = Array.from(rows[start + 1].cells).find(c => c.dataset.origCol === "1");
+        if (belowCell) belowCell.remove();
+      }
+
+      for (let start = 15; start < 33; start += 6) {
+        const firstCell = Array.from(rows[start].cells).find(c => c.dataset.origCol === "1");
+        if (!firstCell) continue;
+
+        firstCell.rowSpan = 6;
+        firstCell.style.verticalAlign = "middle";
+        firstCell.style.textAlign = "center";
+
+        for (let i = 1; i < 6; i++) {
+          const belowCell = Array.from(rows[start + i].cells).find(c => c.dataset.origCol === "1");
+          if (belowCell) belowCell.remove();
+        }
+      }
+
+      const lastRow = rows[rows.length - 1];
+      lastRow.colspan = lastRow.cells.length - 1;
+      Array.from(lastRow.cells).forEach((cell, idx) => {
+        if (idx !== 0) cell.remove();
+      });
+
+      rows.forEach(row => {
+        const firstCell = Array.from(row.cells).find(c => c.dataset.origCol === "0");
+        if (firstCell) firstCell.style.fontWeight = "bold";
+      });
+
+      const colores = ["#FFD700", "#C0C0C0", "#CD7F32"];
+      for (let i = 0; i < 9; i += 3) {
+        [0, 1, 2].forEach((pos, idx) => {
+          const targetCell = Array.from(rows[i + pos]?.cells || []).find(c => c.dataset.origCol === "1");
+          if (targetCell) {
+        targetCell.style.backgroundColor = colores[idx];
+        targetCell.style.fontWeight = "bold";
+          }
+        });
+      }
+
+      let idx2 = 0;
+      for (let start = 9; start < 15; start += 2) {
+        const targetCell = Array.from(rows[start].cells).find(c => c.dataset.origCol === "1");
+        if (targetCell) {
+          targetCell.style.backgroundColor = colores[idx2] || "transparent";
+          targetCell.style.fontWeight = "bold";
+          idx2++;
+        }
+      }
+
+      let idx6 = 0;
+      for (let start = 15; start < 33; start += 6) {
+        const targetCell = Array.from(rows[start].cells).find(c => c.dataset.origCol === "1");
+        if (targetCell) {
+          targetCell.style.backgroundColor = colores[idx6] || "transparent";
+          targetCell.style.fontWeight = "bold";
+          idx6++;
+        }
+      }
+
+      for (let i = 33; i < 44; i += 3) {
+        [0, 1, 2].forEach((pos, idx) => {
+          const targetCell = Array.from(rows[i + pos]?.cells || []).find(c => c.dataset.origCol === "1");
+          if (targetCell) {
+        targetCell.style.backgroundColor = colores[idx];
+        targetCell.style.fontWeight = "bold";
+          }
+        });
+      }
+
+      [45, 46].forEach(i => {
+        const targetCell = Array.from(rows[i].cells).find(c => c.dataset.origCol === "1");
+        if (targetCell) {
+          targetCell.style.backgroundColor = "#FFD700"; // Oro
+          targetCell.style.fontWeight = "bold";
+        }
+      });
+
+      resaltarCeldas(table, url);
 
       tabla.appendChild(table);
       tabla.style.display = "block";
@@ -316,79 +465,23 @@
 
   function resaltarCeldas(table, url) {
     const hoja = new URL(url).searchParams.get("hoja")?.toLowerCase() || "";
+    if (hoja.includes("todo evento")) return;
 
     const rows = table.querySelectorAll("tbody tr");
-
-    let allGamesPlayed = true;
-
-    rows.forEach(row => {
-      for (let j = 8; j <= 12; j++) {
-        const cell = row.children[j];
-        if (!cell || cell.textContent.trim() === "" || cell.textContent.trim() === "-") {
-          allGamesPlayed = false;
-          break;
-        }
-      }
-    });
-
-    if (allGamesPlayed) {
-      for (let i = 0; i < rows.length; i++) {
-        if (hoja.includes("mas")) {
-
-          if (i === 0) {
-          rows[i].querySelectorAll("td").forEach(td => {
-            td.style.backgroundColor = "#ffd700";
-            td.style.fontWeight = "bold";
-          });
-          }
-
-          if (i === 1) {
-          rows[i].querySelectorAll("td").forEach(td => {
-            td.style.backgroundColor = "#c0c0c0";
-            td.style.fontWeight = "bold";
-          });
-          }
-
-          if (i === 2) {
-          rows[i].querySelectorAll("td").forEach(td => {
-            td.style.backgroundColor = "#cd7f32";
-            td.style.fontWeight = "bold";
-          });
-          }
-
-          if (i === 2) {
-          rows[i].style.borderBottom = "2px solid black";
-          }
-        }
-      }
-    }
-
-    for (let i = 0; i < rows.length; i++) {
-      const cells = rows[i].children;
-
-      if (hoja.includes("mas")) {
-        for (let j = 7; j <= 12; j++) {
-          const cell = cells[j];
-          const value = parseInt(cell?.textContent.trim());
-          if (!isNaN(value) && value >= 200) {
-            cell.style.backgroundColor = "#ffeb3b";
-          }
-        }
-      }
-    }
 
     const headers = table.querySelectorAll("thead th");
     headers.forEach(th => {
       th.style.backgroundColor = "#1b70d9";
       th.style.color = "white";
     });
+
   }
 
   fetchSheetAsTable(SHEET_URL);
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
   const navbarCollapse = document.getElementById('navbarNavDropdown');
   const overlay = document.getElementById('menu-overlay');
   navbarCollapse.addEventListener('show.bs.collapse', () => {
@@ -404,6 +497,6 @@
     bsCollapse.hide();
   });
   
-</script>
-</body>
-</html>
+  </script>
+  </body>
+  </html>
