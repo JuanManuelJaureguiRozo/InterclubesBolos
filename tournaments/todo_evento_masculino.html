@@ -329,7 +329,7 @@
     rows.forEach(row => {
       for (let j = 8; j <= 10; j++) {
         const cell = row.children[j];
-        if (!cell || cell.textContent.trim() === "" || cell.textContent.trim() === "-") {
+        if (!cell || cell.textContent.trim() === "" || cell.textContent.trim() === "-" || cell.textContent.trim() === "0") {
           allGamesPlayed = false;
           break;
         }
