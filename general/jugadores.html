@@ -248,6 +248,11 @@
   <div class="table-responsive mt-4" id="tabla-resultados" style="display:none;"></div>
 </div>
 
+<!-- ACLARACIÓN (inicialmente oculta) -->
+<p id="nota-prestada" class="text-center mt-2 text-muted" style="display:none;">
+  <em>(p) hace referencia a un/a deportista prestado/a a un club</em>
+</p>
+
 <!-- FOOTER -->
 <footer class="mt-5 text-center">
   <div class="container">
@@ -304,6 +309,7 @@
 
       tabla.appendChild(table);
       tabla.style.display = "block";
+      document.getElementById("nota-prestada").style.display = "block";
 
     } catch (err) {
       console.error("Error al cargar la tabla:", err);
