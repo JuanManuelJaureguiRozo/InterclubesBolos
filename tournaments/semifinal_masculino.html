@@ -83,17 +83,6 @@
       background-color: #f0f0f0;
       color: #000;
     }
-
-    .navbar-custom {
-      position: sticky;
-      top: 0;
-      z-index: 1030;
-      transition: top 0.3s ease-in-out;
-    }
-
-    .navbar-hidden {
-      top: -80px; /* adjust based on navbar height */
-    }
   
     .logo-img {
       height: 40px;
@@ -393,24 +382,6 @@
     bsCollapse.hide();
   });
   
-</script>
-<script>
-  let lastScrollTop = 0;
-  const navbar = document.querySelector(".navbar-custom");
-
-  window.addEventListener("scroll", () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (scrollTop > lastScrollTop && scrollTop > 100) {
-      // scrolling down
-      navbar.classList.add("navbar-hidden");
-    } else {
-      // scrolling up
-      navbar.classList.remove("navbar-hidden");
-    }
-
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // avoid negative values
-  });
 </script>
 </body>
 </html>
