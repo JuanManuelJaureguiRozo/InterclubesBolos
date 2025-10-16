@@ -368,7 +368,7 @@
       const cells = rows[i].children;
 
       if (hoja.includes("del")) {
-        for (let j = 7; j <= 11; j++) {
+        for (let j = 7; j <= 10; j++) {
           const cell = cells[j];
           const value = parseInt(cell?.textContent.trim());
           if (!isNaN(value) && value >= 200) {
