@@ -394,7 +394,6 @@
 
         const cell = cells[j];
         if (!cell || cell.textContent.trim() === "" || cell.textContent.trim() === "0" || cell.textContent.trim() === "-") {
-          console.log("Entré")
           allGamesPlayed = false;
           break;
         }
@@ -403,7 +402,7 @@
       if (!allGamesPlayed) break;
     }
 
-    if (allGamesPlayed) {
+/*     if (allGamesPlayed) {
       for (let i = 0; i < rows.length; i++) {
         if (hoja.includes("eq")) {
 
@@ -433,7 +432,7 @@
           }
         }
       }
-    }
+    } */
 
     for (let i = 0; i < rows.length; i++) {
       const cells = rows[i].children;
