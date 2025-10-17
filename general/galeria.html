@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Final Femenino</title>
+  <title>Galeria</title>
   <link rel="icon" href="../public/favicon_IB.png" type="image/png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -19,13 +19,9 @@
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-  
-    h1 {
-      margin-bottom: 2rem;
-    }
 
     footer {
-      background-color: #1b70d9;
+      background-color: #1c70d9;
       color: white;
       padding: 2rem 1rem;
       text-align: center;
@@ -38,6 +34,10 @@
 
     footer a:hover {
       text-decoration: underline;
+    }
+  
+    h1 {
+      margin-bottom: 2rem;
     }
   
     table {
@@ -60,7 +60,7 @@
     }
   
     .navbar-custom {
-      background-color: #1b70d9;
+      background-color: #1c70d9;
     }
   
     .navbar-custom .nav-link,
@@ -71,7 +71,7 @@
     .navbar-custom .dropdown-menu {
       background-color: white !important;
       color: black !important;
-      border: 1px solid #1b70d9;
+      border: 1px solid #1c70d9;
       box-shadow: none;
     }
   
@@ -111,7 +111,7 @@
         left: 0;
         width: 75%;
         height: 100%;
-        background-color: #1b70d9;
+        background-color: #1c70d9;
         padding-top: 3.5rem;
         padding-left: 1rem;
         z-index: 1050;
@@ -155,28 +155,28 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
-   <nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
-      
-      <!-- MENU BUTTON LEFT SIDE MOBILE -->
-      <button class="navbar-toggler order-1 order-lg-0 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <!-- LOGO AND TEXT RIGHT SIDE MOBILE -->
-      <a class="navbar-brand fw-bold d-flex align-items-center order-2 order-lg-1 ms-auto" href="../index.html">
-        <img src="../public/logo.png" alt="Logo Interclubes" class="logo-img"> Interclubes Bolos
-      </a>
-  
-      <!-- COLLAPSABLE MENU -->
-      <div class="collapse navbar-collapse order-3 order-lg-2" id="navbarNavDropdown">
-        <ul class="navbar-nav flex-column flex-lg-row">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+        
+        <!-- MENU BUTTON LEFT SIDE MOBILE -->
+        <button class="navbar-toggler order-1 order-lg-0 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <!-- LOGO AND TEST RIGHT SIDE MOBILE -->
+        <a class="navbar-brand fw-bold d-flex align-items-center order-2 order-lg-1 ms-auto" href="../index.html">
+            <img src="../public/logo.png" alt="Logo Interclubes" class="logo-img"> Interclubes Bolos
+        </a>
+    
+        <!-- COLLAPSBLE MENU -->
+        <div class="collapse navbar-collapse order-3 order-lg-2" id="navbarNavDropdown">
+          <ul class="navbar-nav flex-column flex-lg-row">
           <!-- HOME -->
           <li class="nav-item">
-            <a class="nav-link" href="../index.html">
+              <a class="nav-link" href="../index.html">
               Inicio
-            </a>
+              </a>
           </li>
           <!-- GENERAL -->
           <li class="nav-item dropdown">
@@ -229,32 +229,23 @@
               <li><a class="dropdown-item" href="../tournaments/final_masculino.html">Final Masculino</a></li>
             </ul>
           </li>
-        </ul>
-      </div>
-  
+          </ul>
+        </div>
     </div>
-  </nav>
-  <div id="menu-overlay" class="menu-overlay"></div>
+</nav>  
+<div id="menu-overlay" class="menu-overlay"></div>  
 
-<div class="container contenido text-center">
-  <h1>Resultados - Final Femenino</h1>
+<div id="galeria"class="container contenido text-center">
+  <h1>Galería</h1>
 
   <!-- LOADER -->
   <div id="loader" class="mt-4 d-flex justify-content-center align-items-center flex-column">
     <div class="spinner-border" style="color: #1b70d9" role="status">
       <span class="visually-hidden">Cargando...</span>
     </div>
-    <p class="mt-3">Cargando resultados, por favor espera...</p>
+    <p class="mt-3">Cargando fotos, por favor espera...</p>
   </div>
-
-  <!-- TABLE -->
-  <div class="table-responsive mt-4" id="tabla-resultados" style="display:none;"></div>
 </div>
-
-<!-- ACLARACIÓN (inicialmente oculta) -->
-<p id="nota-prestada" class="text-center mt-2 text-muted" style="display:none;">
-  <em>(p) hace referencia a un/a deportista prestado/a a un club</em>
-</p>
 
 <!-- FOOTER -->
 <footer class="mt-5 text-center">
@@ -264,156 +255,72 @@
 </footer>
 
 <script>
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxu1NqPwuyQmrddmLgRewBeKnzO4f6ONqehScJopp0YEQvmlQr19mZq4a6hqsOZmIou/exec?hoja=FINALFX";
+  const PHOTOS_URL = "https://interclubesbolos.info/public/photos/photos.json";
 
-  async function fetchSheetAsTable(url) {
-    const loader = document.getElementById("loader");
-    const tabla = document.getElementById("tabla-resultados");
-
+  async function loadPhotos() {
     try {
-      const res = await fetch(url);
+      const res = await fetch(PHOTOS_URL);
       const json = await res.json();
 
-      if (!json || !json.headers || !json.data) {
-        loader.innerHTML = `<p class="text-danger mt-3">No se encontraron resultados para mostrar.</p>`;
-        return;
-      }
+      const gallery = document.getElementById("galeria");
 
-      const table = document.createElement("table");
-      table.className = "table table-bordered table-striped";
+      gallery.innerHTML = "";
 
-      const thead = document.createElement("thead");
-      const trHead = document.createElement("tr");
+      const title = document.createElement("h2");
+      title.textContent = "Delegados";
+      title.className = "text-center my-4 fw-bold text-success";
+      gallery.appendChild(title);
 
-      json.headers.forEach(header => {
-        const th = document.createElement("th");
-        th.textContent = header;
-        trHead.appendChild(th);
+      const row = document.createElement("div");
+      row.className = "row justify-content-center g-3";
+
+      json.photos.forEach(photo => {
+        const col = document.createElement("div");
+        col.className = "col-6 col-md-4 col-lg-3 text-center";
+
+        const img = document.createElement("img");
+        img.src = `https://interclubesbolos.info/public/photos/${photo.filename}`;
+        img.alt = photo.alt || "Delegado";
+        img.className = "img-fluid rounded shadow-sm";
+        img.loading = "lazy";
+
+        const caption = document.createElement("p");
+        caption.textContent = photo.alt || "";
+        caption.className = "mt-2 small fw-semibold";
+
+        col.appendChild(img);
+        col.appendChild(caption);
+        row.appendChild(col);
       });
 
-      thead.appendChild(trHead);
-      table.appendChild(thead);
-
-      const tbody = document.createElement("tbody");
-
-      json.data.forEach(row => {
-        const tr = document.createElement("tr");
-        row.forEach(cell => {
-          const td = document.createElement("td");
-          td.textContent = cell;
-          tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
-      });
-
-      table.appendChild(tbody);
-
-      const result = resaltarCeldas(table, url);
-
-      tabla.appendChild(table);
-      tabla.style.display = "block";
-      document.getElementById("nota-prestada").style.display = "block";
-
+      gallery.appendChild(row);
     } catch (err) {
-      console.error("Error al cargar la tabla:", err);
-      loader.innerHTML = `<p class="text-danger mt-3">Error al cargar los resultados</p>`;
-      return;
+      console.error("Error cargando fotos:", err);
+      const gallery = document.getElementById("galeria");
+      gallery.innerHTML = `<p class="text-danger mt-3 text-center">Error al cargar las fotos</p>`;
     }
-
-    loader.remove();
   }
 
-  function resaltarCeldas(table, url) {
-    const hoja = new URL(url).searchParams.get("hoja")?.toLowerCase() || "";
-
-    const rows = table.querySelectorAll("tbody tr");
-
-    let allGamesPlayed = true;
-
-    rows.forEach(row => {
-      for (let j = 8; j <= 10; j++) {
-        const cell = row.children[j];
-        if (!cell || cell.textContent.trim() === "" || cell.textContent.trim() === "-") {
-          allGamesPlayed = false;
-          break;
-        }
-      }
-    });
-
-    if (allGamesPlayed) {
-      for (let i = 0; i < rows.length; i++) {
-        if (hoja.includes("final")) {
-
-          if (i === 0) {
-          rows[i].querySelectorAll("td").forEach(td => {
-            td.style.backgroundColor = "#ffd700";
-            td.style.fontWeight = "bold";
-          });
-          }
-
-          if (i === 1) {
-          rows[i].querySelectorAll("td").forEach(td => {
-            td.style.backgroundColor = "#c0c0c0";
-            td.style.fontWeight = "bold";
-          });
-          }
-
-          if (i === 2) {
-          rows[i].querySelectorAll("td").forEach(td => {
-            td.style.backgroundColor = "#cd7f32";
-            td.style.fontWeight = "bold";
-          });
-          }
-
-          if (i === 2) {
-          rows[i].style.borderBottom = "2px solid black";
-          }
-        } 
-      }
-    }
-
-    for (let i = 0; i < rows.length; i++) {
-      const cells = rows[i].children;
-
-      if (hoja.includes("final")) {
-        for (let j = 7; j <= 10; j++) {
-          const cell = cells[j];
-          if (!cell) continue;
-          const value = parseInt(cell.textContent.trim());
-          if (!isNaN(value) && value >= 200) {
-            cell.style.backgroundColor = "#ffeb3b";
-          }
-        }
-      }
-    }
-
-    const headers = table.querySelectorAll("thead th");
-    headers.forEach(th => {
-      th.style.backgroundColor = "#1b70d9";
-      th.style.color = "white";
-    });
-  }
-
-  fetchSheetAsTable(SHEET_URL);
+  loadPhotos();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  const navbarCollapse = document.getElementById('navbarNavDropdown');
-  const overlay = document.getElementById('menu-overlay');
-  navbarCollapse.addEventListener('show.bs.collapse', () => {
-    document.body.classList.add('offcanvas-open');
-    overlay.classList.add('show');
-  });
-  navbarCollapse.addEventListener('hide.bs.collapse', () => {
-    document.body.classList.remove('offcanvas-open');
-    overlay.classList.remove('show');
-  });
-  overlay.addEventListener('click', () => {
-    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
-    bsCollapse.hide();
-  });
-  
+const navbarCollapse = document.getElementById('navbarNavDropdown');
+const overlay = document.getElementById('menu-overlay');
+navbarCollapse.addEventListener('show.bs.collapse', () => {
+document.body.classList.add('offcanvas-open');
+overlay.classList.add('show');
+});
+navbarCollapse.addEventListener('hide.bs.collapse', () => {
+document.body.classList.remove('offcanvas-open');
+overlay.classList.remove('show');
+});
+overlay.addEventListener('click', () => {
+const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+bsCollapse.hide();
+});
+
 </script>
 </body>
 </html>
