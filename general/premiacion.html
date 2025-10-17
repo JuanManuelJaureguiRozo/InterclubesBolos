@@ -392,11 +392,23 @@
         }
       }
 
-      const lastRow = rows[rows.length - 1];
-      lastRow.colspan = lastRow.cells.length - 1;
-      Array.from(lastRow.cells).forEach((cell, idx) => {
-        if (idx !== 0) cell.remove();
-      });
+const lastRow = rows[47]; // posición exacta
+
+      if (lastRow) {
+        const cells = Array.from(lastRow.cells);
+        if (cells.length > 1) {
+          const firstCell = cells[0];
+          const secondCell = cells[1];
+
+          secondCell.colSpan = cells.length - 1;
+
+          secondCell.style.textAlign = "center";
+          secondCell.style.verticalAlign = "middle";
+          secondCell.style.backgroundColor = "#f8f9fa";
+
+          cells.slice(2).forEach(cell => cell.remove());
+        }
+      }
 
       rows.forEach(row => {
         const firstCell = Array.from(row.cells).find(c => c.dataset.origCol === "0");
@@ -450,7 +462,7 @@
           targetCell.style.backgroundColor = "#FFD700"; // Oro
           targetCell.style.fontWeight = "bold";
         }
-      });
+      });      
 
       resaltarCeldas(table, url);
 
