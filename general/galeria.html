@@ -255,7 +255,7 @@
 </footer>
 
 <script>
-  const PHOTOS_URL = "https://interclubesbolos.info/public/photos/photos.json";
+  const PHOTOS_URL = "../public/photos/photos.json";
 
   async function loadPhotos() {
     try {
@@ -266,9 +266,13 @@
 
       gallery.innerHTML = "";
 
+      const ptitle = document.createElement("h1");
+      ptitle.textContent = "Galería";
+
       const title = document.createElement("h2");
       title.textContent = "Delegados";
-      title.className = "text-center my-4 fw-bold text-success";
+      title.className = "text-center my-4 fw-bold";
+      gallery.appendChild(ptitle);
       gallery.appendChild(title);
 
       const row = document.createElement("div");
@@ -279,17 +283,12 @@
         col.className = "col-6 col-md-4 col-lg-3 text-center";
 
         const img = document.createElement("img");
-        img.src = `https://interclubesbolos.info/public/photos/${photo.filename}`;
+        img.src = `../public/photos/${photo.filename}`;
         img.alt = photo.alt || "Delegado";
         img.className = "img-fluid rounded shadow-sm";
         img.loading = "lazy";
 
-        const caption = document.createElement("p");
-        caption.textContent = photo.alt || "";
-        caption.className = "mt-2 small fw-semibold";
-
         col.appendChild(img);
-        col.appendChild(caption);
         row.appendChild(col);
       });
 
