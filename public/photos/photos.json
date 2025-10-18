@@ -1,16 +1,11 @@
 {
   "photos": [
-    {
-      "filename": "reunion_delegados.jpg",
-      "alt": "Reunión de delegados"
-    },
-    {
-      "filename": "sushi_delegados.jpg",
-      "alt": "Sushi de delegados"
-    },
-    {
-      "filename": "ronda_delegados.jpg",
-      "alt": "Ronda de delegados"
-    }
+    { "filename": "reunion_delegados.jpg", "alt": "Reunión de delegados" },
+    { "filename": "sushi_delegados.jpg", "alt": "Sushi de delegados" },
+    { "filename": "ronda_delegados.jpg", "alt": "Ronda de delegados" }
+  ],
+  "individual": [
+    { "filename": "ronda1_individual.jpg", "alt": "Individual 1" },
+    { "filename": "ronda2_individual.jpg", "alt": "Individual 2" }
   ]
 }

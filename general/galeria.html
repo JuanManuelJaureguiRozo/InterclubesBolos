@@ -263,21 +263,22 @@
       const json = await res.json();
 
       const gallery = document.getElementById("galeria");
-
       gallery.innerHTML = "";
 
+      // Main title
       const ptitle = document.createElement("h1");
       ptitle.textContent = "Galería";
       ptitle.className = "text-center my-4 fw-bold";
-
-      const title = document.createElement("h2");
-      title.textContent = "Delegados";
-      title.className = "text-center my-4 fw-bold";
       gallery.appendChild(ptitle);
-      gallery.appendChild(title);
 
-      const row = document.createElement("div");
-      row.className = "row justify-content-center g-3";
+      // Delegados section
+      const titleDelegados = document.createElement("h3");
+      titleDelegados.textContent = "Delegados";
+      titleDelegados.className = "text-center my-4 fw-bold";
+      gallery.appendChild(titleDelegados);
+
+      const rowDelegados = document.createElement("div");
+      rowDelegados.className = "row justify-content-center g-3";
 
       json.photos.forEach(photo => {
         const col = document.createElement("div");
@@ -290,10 +291,37 @@
         img.loading = "lazy";
 
         col.appendChild(img);
-        row.appendChild(col);
+        rowDelegados.appendChild(col);
       });
 
-      gallery.appendChild(row);
+      gallery.appendChild(rowDelegados);
+
+      // Individual section
+      const titleIndividual = document.createElement("h3");
+      titleIndividual.textContent = "Individual";
+      titleIndividual.className = "text-center my-4 fw-bold";
+      gallery.appendChild(titleIndividual);
+
+      const rowIndividual = document.createElement("div");
+      rowIndividual.className = "row justify-content-center g-3";
+
+      if (json.individual && Array.isArray(json.individual)) {
+        json.individual.forEach(photo => {
+          const col = document.createElement("div");
+          col.className = "col-6 col-md-4 col-lg-3 text-center";
+
+          const img = document.createElement("img");
+          img.src = `../public/photos/${photo.filename}`;
+          img.alt = photo.alt || "Individual";
+          img.className = "img-fluid rounded shadow-sm";
+          img.loading = "lazy";
+
+          col.appendChild(img);
+          rowIndividual.appendChild(col);
+        });
+      }
+
+      gallery.appendChild(rowIndividual);
     } catch (err) {
       console.error("Error cargando fotos:", err);
       const gallery = document.getElementById("galeria");
