@@ -5,7 +5,15 @@
     { "filename": "ronda_delegados.jpg", "alt": "Ronda de delegados" }
   ],
   "individual": [
-    { "filename": "ronda1_individual.jpg", "alt": "Individual 1" },
-    { "filename": "ronda2_individual.jpg", "alt": "Individual 2" }
+    { "filename": "ronda1_individual.jpg", "alt": "Individual Viernes 2 PM" },
+    { "filename": "ronda2_individual.jpg", "alt": "Individual Viernes 6 PM" },
+    { "filename": "ronda3_individual.jpg", "alt": "Individual Sábado 9 AM" },
+    { "filename": "ronda4_individual.jpg", "alt": "Individual Sábado 1 PM" },
+    { "filename": "ronda5_individual.jpg", "alt": "Individual Sábado 5 PM" }
+  ],
+  "parejas": [
+    { "filename": "ronda1_parejas.jpg", "alt": "Parejas Domingo 9 AM" },
+    { "filename": "ronda2_parejas.jpg", "alt": "Parejas Domingo 1 PM" },
+    { "filename": "ronda3_parejas.jpg", "alt": "Parejas Domingo 5 PM" }
   ]
 }
