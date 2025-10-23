@@ -14,6 +14,7 @@
   "parejas": [
     { "filename": "ronda1_parejas.jpg", "alt": "Parejas Domingo 9 AM" },
     { "filename": "ronda2_parejas.jpg", "alt": "Parejas Domingo 1 PM" },
-    { "filename": "ronda3_parejas.jpg", "alt": "Parejas Domingo 5 PM" }
+    { "filename": "ronda3_parejas.jpg", "alt": "Parejas Domingo 5 PM" },
+    { "filename": "ronda4_parejas.jpg", "alt": "Parejas Miércoles 6 PM" }
   ]
 }
