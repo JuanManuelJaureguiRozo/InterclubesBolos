@@ -337,16 +337,16 @@
     let allGamesPlayed = true;
 
     rows.forEach(row => {
-      for (let j = 8; j <= 10; j++) {
+      for (let j = 6; j <= 6; j++) {
         const cell = row.children[j];
-        if (!cell || cell.textContent.trim() === "" || cell.textContent.trim() === "-" || cell.textContent.trim() === "0") {
+        if (!cell || cell.textContent.trim() === "" || cell.textContent.trim() === "-") {
           allGamesPlayed = false;
           break;
         }
       }
     });
 
-/*     if (allGamesPlayed) {
+    if (allGamesPlayed) {
       for (let i = 0; i < rows.length; i++) {
         if (hoja.includes("te")) {
 
@@ -376,7 +376,7 @@
           }
         }
       }
-    } */
+    }
   }
 
   fetchSheetAsTable(SHEET_URL);
