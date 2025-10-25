@@ -384,23 +384,23 @@
 
     let allGamesPlayed = true;
 
-    for (let i = 0; i < rows.length; i++) {
-      const cells = rows[i].children;
+    rows.forEach((row, i) => {
+      const cells = row.children;
 
-      for (let j = 7; j <= 12; j++) {
-        if ((j === 7 && i % 6 === 0) || (j === 12 && i % 6 !== 0)) {
+      for (let j = 5; j <= 6; j++) {
+        if ((j === 5 && i % 6 === 0) || (j === 6 && i % 6 !== 0)) {
           continue;
         }
 
         const cell = cells[j];
-        if (!cell || cell.textContent.trim() === "" || cell.textContent.trim() === "0" || cell.textContent.trim() === "-") {
+        if (!cell || cell.textContent.trim() === "" || cell.textContent.trim() === "-") {
           allGamesPlayed = false;
           break;
         }
       }
 
-      if (!allGamesPlayed) break;
-    }
+      if (!allGamesPlayed) return;
+    });
 
     if (allGamesPlayed) {
       for (let i = 0; i < rows.length; i++) {

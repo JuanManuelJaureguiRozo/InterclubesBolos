@@ -331,8 +331,9 @@
     let allGamesPlayed = true;
 
     rows.forEach(row => {
-      for (let j = 8; j <= 12; j++) {
+      for (let j = 6; j <= 6; j++) {
         const cell = row.children[j];
+        console.log(cell);
         if (!cell || cell.textContent.trim() === "" || cell.textContent.trim() === "-") {
           allGamesPlayed = false;
           break;
