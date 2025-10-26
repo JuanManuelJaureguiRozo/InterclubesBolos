@@ -377,6 +377,33 @@
 
       gallery.appendChild(rowEquipos);
 
+      // Apoyo section
+      const titleApoyo = document.createElement("h3");
+      titleApoyo.textContent = "Equipo de Apoyo";
+      titleApoyo.className = "text-center my-4 fw-bold";
+      gallery.appendChild(titleApoyo);
+
+      const rowApoyo = document.createElement("div");
+      rowApoyo.className = "row justify-content-center g-3";
+
+      if (json.apoyo && Array.isArray(json.apoyo)) {
+        json.apoyo.forEach(photo => {
+          const col = document.createElement("div");
+          col.className = "col-6 col-md-4 col-lg-3 text-center";
+
+          const img = document.createElement("img");
+          img.src = `../public/photos/${photo.filename}`;
+          img.alt = photo.alt || "Apoyo";
+          img.className = "img-fluid rounded shadow-sm";
+          img.loading = "lazy";
+
+          col.appendChild(img);
+          rowApoyo.appendChild(col);
+        });
+      }
+
+      gallery.appendChild(rowApoyo);
+
     } catch (err) {
       console.error("Error cargando fotos:", err);
       const gallery = document.getElementById("galeria");

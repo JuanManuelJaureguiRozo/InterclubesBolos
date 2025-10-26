@@ -20,6 +20,11 @@
   ],
   "equipos": [
     { "filename": "ronda1_equipos.jpg", "alt": "Equipos Viernes 2 PM" },
-    { "filename": "ronda2_equipos.jpg", "alt": "Equipos Viernes 6 PM" }
+    { "filename": "ronda2_equipos.jpg", "alt": "Equipos Viernes 6 PM" },
+    { "filename": "ronda3_equipos.jpg", "alt": "Equipos Sábado 9 AM" },
+    { "filename": "ronda4_equipos.jpg", "alt": "Equipos Sábado 1 PM" }
+  ],
+  "apoyo": [
+    { "filename": "equipo_bolera.jpg", "alt": "Equipo Bolera" }
   ]
 }
